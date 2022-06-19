@@ -1,0 +1,122 @@
+# time between ui refreshes updates [ms]
+uiInterval: 2000
+# tick interval for simulation
+tickInterval: 2000
+
+saveImages: false
+display:
+  # initial width of window (if saveImages=false)
+  # width of output images (if saveImages=true)
+  width: 1280
+  # initial height of window (if saveImages=false)
+  # height of output images (if saveImages=true)
+  height: 720
+  # number of pictures to display in one row
+  columns: 3
+
+startTime: "14:00"
+drinks:
+  - name: "Cola Rum"
+    points:
+    - value: 2.5
+      time: "14:00"
+    - value: 2.5
+      time: "23:50"
+    - value: 1.0
+      time: "00:00"
+    - value: 1.0
+      time: "00:30"
+    - value: 2.5
+      time: "00:40"
+    - value: 2.5
+      time: "03:00"
+  - name: "Cappy Vodka"
+    points:
+    - value: 3.0
+      time: "14:00"
+    - value: 3.0
+      time: "23:50"
+    - value: 1.0
+      time: "00:00"
+    - value: 1.0
+      time: "00:30"
+    - value: 3.0
+      time: "00:40"
+    - value: 3.0
+      time: "03:00"
+  - name: "Wüstenwasser"
+    points:
+    - value: 2.5
+      time: "14:00"
+    - value: 2.5
+      time: "23:50"
+    - value: 1.0
+      time: "00:00"
+    - value: 1.0
+      time: "00:30"
+    - value: 2.5
+      time: "00:40"
+    - value: 2.5
+      time: "03:00"
+  - name: "Vodka Bull"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "23:50"
+    - value: 1.5
+      time: "00:00"
+    - value: 1.5
+      time: "00:30"
+    - value: 3.0
+      time: "00:40"
+    - value: 3.0
+      time: "03:00"
+  - name: "Gin Tonic"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "23:50"
+    - value: 1.0
+      time: "00:00"
+    - value: 1.0
+      time: "00:30"
+    - value: 2.5
+      time: "00:40"
+    - value: 2.5
+      time: "03:00"
+  - name: "Bacardi Cola"
+    points:
+    - value: 3.0
+      time: "14:00"
+    - value: 3.0
+      time: "23:50"
+    - value: 1.0
+      time: "00:00"
+    - value: 1.0
+      time: "00:30"
+    - value: 2.5
+      time: "00:40"
+    - value: 2.5
+      time: "03:00"
+
+noise:
+  seed: 6
+  max: 0.2
+  # variance of normal distribution
+  variance: 0.01
+
+
+# settings for the plots
+plot:
+  # how many ticks are shown (if 0 --> show full trajectory)
+  showNTicks: 1000
+  ymin: 0.5
+  ymax: 4.0
+  shadePassiveAlpha: 0.2
+  shadeActiveAlpha: 0.6
+  # colors of the shade (cycled through)
+  shadeColors:
+    - "#1f77b4"
+    - "#ff7f0e"
