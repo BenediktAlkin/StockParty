@@ -1,13 +1,15 @@
 import sys
 import ui
-import sim
+import simulation
 import yaml
 
-if __name__ == "__main__":
+
+def main():
     with open("config.yaml", encoding='utf8') as f:
         config = yaml.safe_load(f)
 
-    if config["saveImages"]:
-        sim.Sim(config).save_images(config["display"]["width"], config["display"]["height"])
-    else:
-        sys.exit(ui.main(sim.Sim(config), config))
+    simulation.Sim(config).save_images(config["display"]["width"], config["display"]["height"])
+
+
+if __name__ == "__main__":
+    main()

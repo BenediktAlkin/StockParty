@@ -1,20 +1,12 @@
-# time between ui refreshes updates [ms]
-uiInterval: 2000
-# tick interval for simulation
-tickInterval: 2000
+# tick interval for simulation (default=1000)
+tick_interval: 2000
+seed: 6
+# maximal value for truncating normal distribution (default=0.2)
+noise_max: 0.2
+# variance of normal distribution (default=0.01)
+noise_variance: 0.01
 
-saveImages: false
-display:
-  # initial width of window (if saveImages=false)
-  # width of output images (if saveImages=true)
-  width: 1280
-  # initial height of window (if saveImages=false)
-  # height of output images (if saveImages=true)
-  height: 720
-  # number of pictures to display in one row
-  columns: 3
-
-startTime: "14:00"
+start_time: "14:00"
 drinks:
   - name: "Cola Rum"
     points:
@@ -100,23 +92,3 @@ drinks:
       time: "00:40"
     - value: 2.5
       time: "03:00"
-
-noise:
-  seed: 6
-  max: 0.2
-  # variance of normal distribution
-  variance: 0.01
-
-
-# settings for the plots
-plot:
-  # how many ticks are shown (if 0 --> show full trajectory)
-  showNTicks: 1000
-  ymin: 0.5
-  ymax: 4.0
-  shadePassiveAlpha: 0.2
-  shadeActiveAlpha: 0.6
-  # colors of the shade (cycled through)
-  shadeColors:
-    - "#1f77b4"
-    - "#ff7f0e"
