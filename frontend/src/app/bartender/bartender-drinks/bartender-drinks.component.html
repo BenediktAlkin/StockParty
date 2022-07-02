@@ -13,13 +13,13 @@
     </mat-grid-tile>
 </mat-grid-list>
 
-<div class="overlay" *ngIf="showOverlayCounter > 0" [ngClass]="showOverlayCounter > 1 ? 'fade-in' : 'fade-out'">
+<div class="overlay" [ngClass]="showOverlay ? 'fade-in' : 'fade-out'">
     <div class="bottom-center">
         <div class="horizontal">
             <div class="same-height">
                 <mat-icon>view_column</mat-icon>
             </div>
-            <div class="same-height">
+            <div class="same-height" (mousedown)="sliderMouseDown()">
                 <mat-slider min="1" max="5" [(ngModel)]="cols"></mat-slider>
             </div>
         </div>

@@ -10,8 +10,8 @@ export class BartenderDrinksComponent implements OnInit {
   service: BackendService
   cols = 2
   isLoaded = false
-  showOverlayCounter = 0
-  showOverlayCounterInterval: ReturnType<typeof setInterval> = setInterval(() => null, 1000);
+  showOverlay = false
+  private clickedOnSlider = false;
 
   bartenderDrinkInfos?: BartenderDrinkInfo[]
 
@@ -30,11 +30,17 @@ export class BartenderDrinksComponent implements OnInit {
     this.bartenderDrinkInfos = this.service.getBartenderDrinkInfos()
   }
 
-  @HostListener('document:click', ['$event'])
-  documentClick(event: MouseEvent) {
-    this.showOverlayCounter = 3
-    clearInterval(this.showOverlayCounterInterval);
-    this.showOverlayCounterInterval = setInterval(() => this.showOverlayCounter--, 1000)
+  @HostListener('document:click')
+  @HostListener('document:mousepressed')
+  documentClick() {
+    if (!this.clickedOnSlider)
+      this.showOverlay = !this.showOverlay
+    else
+      this.clickedOnSlider = false;
+
+  }
+  sliderMouseDown() {
+    this.clickedOnSlider = true;
   }
 
 }

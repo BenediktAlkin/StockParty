@@ -29,19 +29,14 @@
     display: table-cell;
 }
 .fade-in{
-    animation: fade-in-animation 1.1s
-}
-@keyframes fade-in-animation {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s linear;
 }
 .fade-out{
-    /* with 1s the component flickers in sometimes*/
-    animation: fade-out-animation 1.1s
-}
-@keyframes fade-out-animation {
-    from { opacity: 1; }
-    to   { opacity: 0; }
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
 }
 
 mat-icon{
