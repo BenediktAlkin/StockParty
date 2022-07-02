@@ -22,7 +22,7 @@ export class BartenderDrinksComponent implements OnInit {
   ngOnInit(): void {
     this.service.getDataFromBackend()
     this.refresh()
-    setInterval(() => this.refresh(), this.service.refreshInterval)
+    // setInterval(() => this.refresh(), this.service.refreshInterval)
     this.isLoaded = true
   }
 
