@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon'
 
 
 
@@ -26,6 +27,7 @@ import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender
     MatGridListModule,
     MatSliderModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

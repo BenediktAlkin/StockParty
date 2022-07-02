@@ -1,11 +1,28 @@
-<div>
-    <mat-spinner *ngIf=" isLoaded===true"></mat-spinner>
+<div class="overlay" *ngIf="isLoaded === false">
+    <div class="center">
+        <mat-spinner></mat-spinner>
+    </div>>
 </div>
 
 
+
 <mat-grid-list *ngIf="isLoaded === false" [cols]="cols" rowHeight="fit">
-    <mat-grid-tile *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">{{ bartenderDrinkInfo.drink }}
-        {{ bartenderDrinkInfo.price }}</mat-grid-tile>
+    <mat-grid-tile *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">
+        {{ bartenderDrinkInfo.drink }}
+        {{ bartenderDrinkInfo.price }}
+    </mat-grid-tile>
 </mat-grid-list>
 
-<mat-slider min="1" max="5" [(ngModel)]="cols"></mat-slider>
+<div class="overlay" *ngIf="showOverlayCounter > 0" [ngClass]="showOverlayCounter > 1 ? 'fade-in' : 'fade-out'">
+    <div class="bottom-center">
+        <div class="horizontal">
+            <div class="same-height">
+                <mat-icon>view_column</mat-icon>
+            </div>
+            <div class="same-height">
+                <mat-slider min="1" max="5" [(ngModel)]="cols"></mat-slider>
+            </div>
+        </div>
+
+    </div>
+</div>
