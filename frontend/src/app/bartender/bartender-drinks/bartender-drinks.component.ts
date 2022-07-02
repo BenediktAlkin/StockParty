@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { BackendService, BartenderDrinkInfo } from 'src/app/backend.service';
 
 @Component({
@@ -6,12 +6,13 @@ import { BackendService, BartenderDrinkInfo } from 'src/app/backend.service';
   templateUrl: './bartender-drinks.component.html',
   styleUrls: ['./bartender-drinks.component.css']
 })
-export class BartenderDrinksComponent implements OnInit {
+export class BartenderDrinksComponent implements OnInit, OnDestroy {
   service: BackendService
   cols = 2
   isLoaded = false
   showOverlay = false
   private clickedOnSlider = false;
+  private timer: any;
 
   bartenderDrinkInfos?: BartenderDrinkInfo[]
 
@@ -22,8 +23,11 @@ export class BartenderDrinksComponent implements OnInit {
   ngOnInit(): void {
     this.service.getDataFromBackend()
     this.refresh()
-    // setInterval(() => this.refresh(), this.service.refreshInterval)
+    // this.timer = setInterval(() => this.refresh(), this.service.refreshInterval)
     this.isLoaded = true
+  }
+  ngOnDestroy(): void {
+    // clearInterval(this.timer)
   }
 
   refresh() {
