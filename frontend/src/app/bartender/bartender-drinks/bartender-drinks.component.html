@@ -1,0 +1,11 @@
+<div>
+    <mat-spinner *ngIf=" isLoaded===true"></mat-spinner>
+</div>
+
+
+<mat-grid-list *ngIf="isLoaded === false" [cols]="cols" rowHeight="fit">
+    <mat-grid-tile *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">{{ bartenderDrinkInfo.drink }}
+        {{ bartenderDrinkInfo.price }}</mat-grid-tile>
+</mat-grid-list>
+
+<mat-slider min="1" max="5" [(ngModel)]="cols"></mat-slider>
