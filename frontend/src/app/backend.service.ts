@@ -25,9 +25,9 @@ export class BackendService {
     this.refreshInterval = 1000
     this.drinkPrices = [
       { drink: "Cola Rum", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
-      { drink: "Cola Rum", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
-      { drink: "Cola Rum", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
-      { drink: "Cola Rum", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
+      { drink: "Wüstenwasser", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
+      { drink: "Wüstenwasser", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
+      { drink: "Wüstenwasser", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
       { drink: "Cola Rum", prices: [1.15, 2.05, 3.01, 3.9], roundedPrices: [1.0, 2.0, 3.0, 4.0], expectedPrices: [2.0, 1.0, 3.0, 4.0] },
     ]
   }
