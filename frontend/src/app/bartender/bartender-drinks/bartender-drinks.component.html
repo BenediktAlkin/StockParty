@@ -6,7 +6,7 @@
 
 
 
-<mat-grid-list *ngIf="isLoaded === false" [cols]="cols" rowHeight="fit">
+<mat-grid-list *ngIf="isLoaded === true" [cols]="cols" rowHeight="fit">
     <mat-grid-tile *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">
         {{ bartenderDrinkInfo.drink }}
         {{ bartenderDrinkInfo.price }}
@@ -20,7 +20,7 @@
                 <mat-icon>view_column</mat-icon>
             </div>
             <div class="same-height" (mousedown)="sliderMouseDown()">
-                <mat-slider min="1" max="5" [(ngModel)]="cols"></mat-slider>
+                <mat-slider thumbLabel min="1" max="5" [(ngModel)]="cols"></mat-slider>
             </div>
         </div>
 
