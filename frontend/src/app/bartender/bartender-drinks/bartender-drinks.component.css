@@ -1,58 +1,98 @@
+/* mat-grid-list {
+    width: 100vw;
+    height: 100vh;
+} */
+
+.drink-info {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    gap: 5em;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    background-color: crimson;
+}
+
+.drink-info-item {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    background-color: aqua;
+}
+
+.slope-info {
+    display: flex;
+    align-items: center;
+}
+
+.text-primary {
+    font-size: 30px;
+}
+
+.text-secondary {
+    font-size: 35px;
+}
+
+.arrow {
+    background-color: purple;
+    height: 35px;
+    width: 35px;
+}
+
+.drink-text {
+    background-color: red;
+}
+
+.price-text {
+    background-color: green;
+    justify-self: end;
+}
+
+
 .overlay {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh);
+    height: 100vh;
 }
 
 .bottom-center {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    height: calc(100vh);
+    height: 100vh;
 }
 
-.horizontal{
-    display: flex;
-    align-items: center;
-}
-.fade-in{
+
+.fade-in {
     visibility: visible;
     opacity: 1;
     transition: opacity 1s linear;
 }
-.fade-out{
+
+.fade-out {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
 }
 
-.center-vertically{
+.center-vertically {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
 }
 
-mat-icon{
-    font-size: 30px;
-    height: 30px;
-    width: 30px;
-}
 
-mat-grid-list {
-    width: 100vw;
-    height: 100vh;
-}
 
 mat-slider {
     width: 300px;

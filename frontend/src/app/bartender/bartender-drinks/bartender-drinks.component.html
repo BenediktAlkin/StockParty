@@ -1,27 +1,32 @@
+<div *ngIf="isLoaded === true">
+    <div class="drink-info">
+        <div class="drink-info-item" *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">
+            <div class="text-primary drink-text">
+                {{ bartenderDrinkInfo.drink }}
+            </div>
+            <div class="text-primary price-text">
+                {{ bartenderDrinkInfo.roundedPrice }}€
+            </div>
+            <div class="text-secondary slope-info">
+                {{ bartenderDrinkInfo.price }}€
+                <mat-icon class="text-secondary arrow">arrow_right_alt</mat-icon>
+                {{ bartenderDrinkInfo.expectedPrice }}€
+            </div>
+            <div class="text-secondary">
+                slope={{ bartenderDrinkInfo.slope }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="overlay" *ngIf="isLoaded === false">
     <div class="center">
         <mat-spinner></mat-spinner>
     </div>>
 </div>
 
-
-
-<mat-grid-list *ngIf="isLoaded === true" [cols]="cols" rowHeight="fit">
-    <mat-grid-tile *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">
-        <div class="horizontal">
-            {{ bartenderDrinkInfo.drink }} {{ bartenderDrinkInfo.roundedPrice }} {{ bartenderDrinkInfo.price }} {{
-            bartenderDrinkInfo.expectedPrice }} {{ bartenderDrinkInfo.slope }}
-            <div>
-                <mat-icon *ngIf="bartenderDrinkInfo.slope == -1">arrow_downward</mat-icon>
-                <mat-icon *ngIf="bartenderDrinkInfo.slope == 0">arrow_right_alt</mat-icon>
-                <mat-icon *ngIf="bartenderDrinkInfo.slope == 1">arrow_upward</mat-icon>
-            </div>
-        </div>
-
-    </mat-grid-tile>
-</mat-grid-list>
-
-<div class="overlay" [ngClass]="showOverlay ? 'fade-in' : 'fade-out'">
+<div class="overlay" [ngClass]="showOverlay ? 'fade-in' : 'fade-out'" *ngIf="isLoaded === false">
     <div class="bottom-center">
         <div class="horizontal">
             <mat-icon>view_column</mat-icon>

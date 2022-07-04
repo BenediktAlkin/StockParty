@@ -8,9 +8,9 @@ interface DrinkPrices {
 }
 export interface BartenderDrinkInfo {
   drink: string
-  price: number
-  roundedPrice: number
-  expectedPrice: number
+  price: string
+  roundedPrice: string
+  expectedPrice: string
   slope: number
 }
 
@@ -39,10 +39,15 @@ export class BackendService {
     let timestep = Math.floor((dateTime.getTime() - this.startTime!.getTime()) / 1000) % this.drinkPrices![0].prices.length
     return this.drinkPrices!.map(dp => <BartenderDrinkInfo>{
       drink: dp.drink,
-      price: dp.prices[timestep],
-      roundedPrice: dp.roundedPrices[timestep],
-      expectedPrice: dp.expectedPrices[timestep],
+      price: this.number_to_string(dp.prices[timestep]),
+      roundedPrice: this.number_to_string(dp.roundedPrices[timestep]),
+      expectedPrice: this.number_to_string(dp.expectedPrices[timestep]),
       slope: Math.sign(dp.expectedPrices[timestep] - dp.prices[timestep]),
+    })
+  }
+  private number_to_string(x: number): string {
+    return x.toLocaleString('de-DE', {
+      minimumFractionDigits: 2,
     })
   }
 }
