@@ -41,8 +41,11 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   closeSettings(calledFromInterval: boolean): void {
     console.log("closeSettings")
     this.showSettings = false
-    clearInterval(this.automaticallyCloseSettingsTimer)
-    this.automaticallyCloseSettingsTimer = null
+    if (this.automaticallyCloseSettingsTimer != null) {
+      clearInterval(this.automaticallyCloseSettingsTimer)
+      this.automaticallyCloseSettingsTimer = null
+    }
+
 
     if (!calledFromInterval)
       this.clickedOnClose = true
@@ -53,14 +56,17 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('document:click')
+  @HostListener('document:mousepressed')
   documentClick() {
     console.log("clicked")
     if (this.clickedOnClose)
       this.clickedOnClose = false
     else
       this.showSettings = true
-    this.automaticallyCloseSettingsTimer = setInterval(() => this.closeSettings(true), 60000)
 
+    if (this.automaticallyCloseSettingsTimer != null)
+      clearInterval(this.automaticallyCloseSettingsTimer)
+    this.automaticallyCloseSettingsTimer = setInterval(() => this.closeSettings(true), 60000)
   }
 
 }
