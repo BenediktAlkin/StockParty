@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    gap: 5em;
+    column-gap: 5em;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     background-color: crimson;
@@ -21,7 +21,7 @@
 }
 
 .text-primary {
-    font-size: 90px;
+    font-size: 110px;
 }
 
 .text-secondary {
