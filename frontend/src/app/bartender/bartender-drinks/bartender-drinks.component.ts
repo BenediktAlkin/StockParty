@@ -41,8 +41,7 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   closeSettings(calledFromInterval: boolean): void {
     console.log("closeSettings")
     this.showSettings = false
-    if (this.automaticallyCloseSettingsTimer != null)
-      clearInterval(this.automaticallyCloseSettingsTimer)
+    clearInterval(this.automaticallyCloseSettingsTimer)
     this.automaticallyCloseSettingsTimer = null
 
     if (!calledFromInterval)

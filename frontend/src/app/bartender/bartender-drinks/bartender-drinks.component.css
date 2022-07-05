@@ -52,19 +52,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
 }
 
 .settings {
     position: relative;
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    width: 50vw;
-    /* TODO not sure why 30vw is so large here*/
-    height: 30vw;
+    grid-template-columns: 1fr auto;
     justify-content: center;
     align-content: center;
     background: rgba(1, 1, 1, 0.6);
+    padding: 25px;
 }
 
 .settings-close {
