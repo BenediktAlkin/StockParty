@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 
@@ -28,6 +29,7 @@ import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender
     MatSliderModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -9,10 +9,14 @@ import { BackendService, BartenderDrinkInfo } from 'src/app/backend.service';
 export class BartenderDrinksComponent implements OnInit, OnDestroy {
   service: BackendService
   cols = 2
+  columnGap = 5
+  primaryFontSize = 90
+  showSecondaryText = true
+  secondaryFontSize = 45
   isLoaded = false
   showOverlay = false
-  private clickedOnSlider = false;
-  private timer: any;
+  private clickedOnSlider = false
+  private timer: any
 
   bartenderDrinkInfos?: BartenderDrinkInfo[]
 
@@ -28,6 +32,10 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     // clearInterval(this.timer)
+  }
+
+  getColsStyle(): string {
+    return `repeat(${this.cols}, 1fr)`
   }
 
   refresh() {
