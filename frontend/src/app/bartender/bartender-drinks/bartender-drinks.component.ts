@@ -14,9 +14,9 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   showSecondaryText = true
   secondaryFontSize = 45
   isLoaded = false
-  showOverlay = false
-  private clickedOnSlider = false
-  private timer: any
+  showSettings = false
+  private clickedOnClose = false
+  private automaticallyCloseSettingsTimer: any
 
   bartenderDrinkInfos?: BartenderDrinkInfo[]
 
@@ -38,21 +38,30 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
     return `repeat(${this.cols}, 1fr)`
   }
 
+  closeSettings(calledFromInterval: boolean): void {
+    console.log("closeSettings")
+    this.showSettings = false
+    if (this.automaticallyCloseSettingsTimer != null)
+      clearInterval(this.automaticallyCloseSettingsTimer)
+    this.automaticallyCloseSettingsTimer = null
+
+    if (!calledFromInterval)
+      this.clickedOnClose = true
+  }
+
   refresh() {
     this.bartenderDrinkInfos = this.service.getBartenderDrinkInfos()
   }
 
   @HostListener('document:click')
-  @HostListener('document:mousepressed')
   documentClick() {
-    if (!this.clickedOnSlider)
-      this.showOverlay = !this.showOverlay
+    console.log("clicked")
+    if (this.clickedOnClose)
+      this.clickedOnClose = false
     else
-      this.clickedOnSlider = false;
+      this.showSettings = true
+    this.automaticallyCloseSettingsTimer = setInterval(() => this.closeSettings(true), 60000)
 
-  }
-  sliderMouseDown() {
-    this.clickedOnSlider = true;
   }
 
 }

@@ -4,9 +4,14 @@
     </div>>
 </div>
 
-<div class="overlay" *ngIf="isLoaded === true">
+<div class="overlay" *ngIf="showSettings === true">
     <div class="center">
         <div class="settings">
+            <!-- exit -->
+            <button mat-icon-button color="accent" class="settings-close" (click)="closeSettings(false)">
+                <mat-icon>close</mat-icon>
+            </button>
+
             <!-- cols -->
             <div class="settings-label">
                 <mat-icon class="settings-label-icon">view_column</mat-icon>
