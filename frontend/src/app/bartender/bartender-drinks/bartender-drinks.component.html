@@ -49,7 +49,11 @@
                 <mat-icon class="settings-label-icon">format_size</mat-icon>
                 <div>Sekundäre Schriftgröße</div>
             </div>
-            <mat-slider thumbLabel min="10" max="150" [(ngModel)]="secondaryFontSize"></mat-slider>
+            <div class="settings-slider-info">
+                {{ secondaryFontSize }}
+            </div>
+            <mat-slider thumbLabel min="10" max="150" [(ngModel)]="secondaryFontSize" [disabled]="!showSecondaryText">
+            </mat-slider>
 
         </div>
 
