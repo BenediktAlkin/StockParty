@@ -14,12 +14,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender-drinks.component';
+import { StockPricesComponent } from './customer/stock-prices/stock-prices.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BartenderDrinksComponent,
+    StockPricesComponent,
   ],
   imports: [
     BrowserModule,
