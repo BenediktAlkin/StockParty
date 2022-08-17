@@ -14,26 +14,34 @@ export class StockPricesComponent implements OnInit {
   }
 
   private createSvg(): void {
-    const width = 640
-    const height = 400
-    const svg = d3.select("figure#fig")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("viewBox", [0, 0, width, height])
-      .attr("style", "max-width: 100%; height: auto;");
-
-
+    // line styling
+    const lineColor = "red"
     // price range rectangle styling
     const rectOpacityGeneral = 0.2
     const rectOpacityCurrentPrice = 0.8
     const rectColor1 = "#69a3b2"
     const rectColor2 = "#11a311"
+    // title styling
+    const titleMarginTop = 20
+    const titleFontSize = 36
+    // axis styling
+    const xticksFontSize = 16
+    const yticksFontSize = 24
 
-    const marginTop = 20
+
+    const width = 600
+    const height = 400
+    const figure = d3.select("figure#fig")
+    const svg = figure
+      .append("svg")
+      .attr("viewBox", [0, 0, width, height])
+      .attr("style", "max-width: 33%; height: auto;");
+
+
+    const marginTop = titleMarginTop + titleFontSize + 5
     const marginRight = 30
     const marginBottom = 30
-    const marginLeft = 40
+    const marginLeft = 80
     const xRange = [marginLeft, width - marginRight]
     const yRange = [height - marginBottom, marginTop]
 
@@ -59,10 +67,12 @@ export class StockPricesComponent implements OnInit {
     const twoDecimalFormatter = d3.format(".2f")
     const yAxis = d3.axisLeft(yScale).ticks(yTicks).tickFormat(t => `${twoDecimalFormatter(t)}€`);
 
-
+    // x axis
     svg.append("g")
       .attr("transform", `translate(0,${height - marginBottom})`)
-      .call(xAxis);
+      .call(xAxis)
+      // increase font size of xticks
+      .call(g => g.selectAll("text").attr("font-size", `${xticksFontSize}px`));
 
     // y axis
     const rectHeight = (height - marginTop - marginBottom) / yTicks;
@@ -78,7 +88,11 @@ export class StockPricesComponent implements OnInit {
         .attr("y", -rectHeight / 2)
         .attr("height", rectHeight)
         .attr("fill", i => (i as number) % 1 == 0 ? rectColor1 : rectColor2)
-        .attr("opacity", i => Math.abs(Y[Y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral));
+        .attr("opacity", i => Math.abs(Y[Y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral))
+      // increase font size of yticks and make current price bold
+      .call(g => g.selectAll("text")
+        .attr("font-size", `${yticksFontSize}px`)
+        .attr("font-weight", i => Math.abs(Y[Y.length - 1] - (i as number)) < 0.25 ? "bold" : "normal"));
     // remove bar of y-axis
     //.call(g => g.select(".domain").remove()) 
     // draw horizontal grid lines (at exact price points)
@@ -96,11 +110,19 @@ export class StockPricesComponent implements OnInit {
     // draw price line
     svg.append("path")
       .attr("fill", "none")
-      .attr("stroke", "currentColor")
+      .attr("stroke", lineColor)
       .attr("stroke-width", 1.5)
       .attr("stroke-linecap", "round")
       .attr("stroke-linejoin", "round")
       .attr("stroke-opacity", 1)
       .attr("d", line(I));
+
+    // add title
+    svg.append("text")
+      .attr("x", (width / 2))
+      .attr("y", titleMarginTop + titleFontSize)
+      .attr("text-anchor", "middle")
+      .style("font-size", `${titleFontSize}px`)
+      .text("Value vs Date Graph");
   }
 }
