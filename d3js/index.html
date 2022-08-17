@@ -41,7 +41,7 @@
         const xScale = d3.scaleTime().domain(xDomain).range(xRange)
         const yScale = d3.scaleLinear(yDomain, yRange);
         const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%H:%M")).ticks(d3.timeMinute.every(15))
-        const yAxis = d3.axisLeft(yScale).ticks(yTicks);
+        const yAxis = d3.axisLeft(yScale).ticks(yTicks).tickFormat(t => `${t.toFixed(2)}€`);
 
 
         const svg = d3.select("svg")
@@ -63,7 +63,7 @@
             // draw rectangles that indicate closest price point
             .call(g => g.selectAll(".tick")
                 .append("rect")
-                .attr("x", 0)
+                .attr("x", 0.5) // 0.5 is the offset for not overlapping with the yaxis bar
                 .attr("width", width - marginLeft - marginRight)
                 .attr("y", -rectHeight / 2)
                 .attr("height", rectHeight)
@@ -75,9 +75,6 @@
         // .call(g => g.selectAll(".tick line").clone()
         //     .attr("x2", width - marginLeft - marginRight)
         //     .attr("stroke-opacity", 0.2));
-
-        // highlight the current price range rectangle
-        svg.select
 
 
         // Construct a line generator.
