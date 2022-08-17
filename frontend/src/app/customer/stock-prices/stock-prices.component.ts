@@ -11,6 +11,7 @@ export class StockPricesComponent implements OnInit {
 
   ngOnInit(): void {
     this.createSvg()
+    //setInterval(this.createSvg, 1000)
   }
 
   private createSvg(): void {
@@ -31,7 +32,7 @@ export class StockPricesComponent implements OnInit {
 
     const width = 600
     const height = 400
-    const figure = d3.select("figure#fig")
+    const figure = d3.select("figure")
     const svg = figure
       .append("svg")
       .attr("viewBox", [0, 0, width, height])
