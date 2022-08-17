@@ -7,6 +7,12 @@
 <body style="background:lightgrey">
     <svg></svg>
     <script>
+        // price range rectangle styling
+        const rectOpacityGeneral = 0.2
+        const rectOpacityCurrentPrice = 0.8
+        const rectColor1 = "#69a3b2"
+        const rectColor2 = "#11a311"
+
         const marginTop = 20
         const marginRight = 30
         const marginBottom = 30
@@ -28,19 +34,15 @@
 
         // Compute domains.
         xDomain = d3.extent(X);
-        yDomain = [1.5, 4.5];
+        yDomain = [1.25, 4.75];
 
         // Construct scales and axes.
+        const yTicks = 7;
         const xScale = d3.scaleTime().domain(xDomain).range(xRange)
         const yScale = d3.scaleLinear(yDomain, yRange);
-        const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%H:%M")).ticks(d3.timeMinute.every(30))
-        const yAxis = d3.axisLeft(yScale).ticks(height / 50, undefined);
+        const xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%H:%M")).ticks(d3.timeMinute.every(15))
+        const yAxis = d3.axisLeft(yScale).ticks(yTicks);
 
-        // Construct a line generator.
-        const line = d3.line()
-            .curve(d3.curveLinear)
-            .x(i => xScale(X[i]))
-            .y(i => yScale(Y[i]));
 
         const svg = d3.select("svg")
             .attr("width", width)
@@ -53,17 +55,36 @@
             .call(xAxis);
 
         // y axis
+        const rectHeight = (height - marginTop - marginBottom) / yTicks;
         svg.append("g")
             // make some space for y-axis
             .attr("transform", `translate(${marginLeft},0)`)
             .call(yAxis)
-            // remove bar of y-axis
-            //.call(g => g.select(".domain").remove()) 
-            // draw horizontal grid lines
-            .call(g => g.selectAll(".tick line").clone()
-                .attr("x2", width - marginLeft - marginRight)
-                .attr("stroke-opacity", 0.2));
+            // draw rectangles that indicate closest price point
+            .call(g => g.selectAll(".tick")
+                .append("rect")
+                .attr("x", 0)
+                .attr("width", width - marginLeft - marginRight)
+                .attr("y", -rectHeight / 2)
+                .attr("height", rectHeight)
+                .attr("fill", i => i % 1 == 0 ? rectColor1 : rectColor2)
+                .attr("opacity", i => Math.abs(Y[Y.length - 1] - i) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral));
+        // remove bar of y-axis
+        //.call(g => g.select(".domain").remove()) 
+        // draw horizontal grid lines (at exact price points)
+        // .call(g => g.selectAll(".tick line").clone()
+        //     .attr("x2", width - marginLeft - marginRight)
+        //     .attr("stroke-opacity", 0.2));
 
+        // highlight the current price range rectangle
+        svg.select
+
+
+        // Construct a line generator.
+        const line = d3.line()
+            .curve(d3.curveLinear)
+            .x(i => xScale(X[i]))
+            .y(i => yScale(Y[i]));
         // draw price line
         svg.append("path")
             .attr("fill", "none")
@@ -73,6 +94,11 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-opacity", 1)
             .attr("d", line(I));
+
+        // draw rectangles that indicate price range (e.g. 2.25-2.75 -> 2.5)
+        // svg.append("g")
+        //     .attr("fill-opacity", 0.6)
+        //     .call(yAxis);
 
 
     </script>
