@@ -77,10 +77,8 @@ export class StockPricesComponent implements OnInit {
         .attr("width", width - marginLeft - marginRight)
         .attr("y", -rectHeight / 2)
         .attr("height", rectHeight)
-        .attr("fill", rectColor1)
-        // .attr("fill", (i: number) => i % 1 == 0 ? rectColor1 : rectColor2)
-        // .attr("opacity", i => Math.abs(Y[Y.length - 1] - i) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral));
-        .attr("opacity", rectOpacityGeneral));
+        .attr("fill", i => (i as number) % 1 == 0 ? rectColor1 : rectColor2)
+        .attr("opacity", i => Math.abs(Y[Y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral));
     // remove bar of y-axis
     //.call(g => g.select(".domain").remove()) 
     // draw horizontal grid lines (at exact price points)
