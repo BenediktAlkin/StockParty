@@ -1,3 +1,4 @@
+import { PropertyRead } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 
@@ -9,6 +10,7 @@ import * as d3 from 'd3';
 export class StockPriceComponent implements OnInit {
   @Input()
   public id: number = -1;
+  public idString: string = "";
   @Input()
   public name: string = "";
   @Input()
@@ -16,20 +18,23 @@ export class StockPriceComponent implements OnInit {
   @Input()
   public y: number[] = [];
 
+
   constructor() {
   }
 
   ngOnInit(): void {
+    this.idString = `id${this.id}`
     // console.log(this.id)
     // console.log(this.name)
     // console.log(this.x)
     // console.log(this.y)
     this.createSvg()
-    //setInterval(this.createSvg, 1000)
+    setInterval(() => this.createSvg(), 1000)
   }
 
   private createSvg(): void {
-    console.log("tick")
+    //console.log(this)
+    //console.log("tick")
     // line styling
     const lineColor = "red"
     // price range rectangle styling
@@ -38,7 +43,7 @@ export class StockPriceComponent implements OnInit {
     const rectColor1 = "#69a3b2"
     const rectColor2 = "#11a311"
     // title styling
-    const titleMarginTop = 20
+    const titleMarginTop = 0
     const titleFontSize = 36
     // axis styling
     const xticksFontSize = 16
@@ -47,16 +52,23 @@ export class StockPriceComponent implements OnInit {
 
     const width = 600
     const height = 400
-    const figure = d3.select("figure")
-    //figure.selectAll("*").remove()
+    //const figure = d3.select(`#${this.idString}`)
+    const figures = d3.selectAll("figure")
+    // console.log(figures)
+    const figure = figures.filter((_, i) => i === this.id)
+    // console.log(figure)
+    const figureChilds = figure.selectAll("*")
+    // console.log(figureChilds)
+    figureChilds.remove()
     const svg = figure
       .append("svg")
       .attr("viewBox", [0, 0, width, height])
-      .attr("style", "max-width: 33%; height: auto;");
+      .attr("style", "max-width: 100%; height: auto;");
+    //.attr("style", "width: 100%; height: 100%;");
 
 
     const marginTop = titleMarginTop + titleFontSize + 5
-    const marginRight = 30
+    const marginRight = 0
     const marginBottom = 30
     const marginLeft = 80
     const xRange = [marginLeft, width - marginRight]
