@@ -15,6 +15,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender-drinks.component';
 import { StockPricesComponent } from './customer/stock-prices/stock-prices.component';
+import { StockPriceComponent } from './customer/stock-price/stock-price.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { StockPricesComponent } from './customer/stock-prices/stock-prices.compo
     AppComponent,
     BartenderDrinksComponent,
     StockPricesComponent,
+    StockPriceComponent,
   ],
   imports: [
     BrowserModule,
