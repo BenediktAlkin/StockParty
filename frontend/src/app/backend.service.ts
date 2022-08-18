@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 interface DrinkPrices {
   drink: string
@@ -19,6 +22,13 @@ export class BackendService {
   startTime?: Date
   refreshInterval?: number
   drinkPrices?: DrinkPrices[]
+
+  constructor(private http: HttpClient) {
+  }
+
+  getData() {
+    return this.http.get("/api/get_data")
+  }
 
   getDataFromBackend() {
     this.startTime = new Date()

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from 'src/app/backend.service';
 
 @Component({
   selector: 'customer-stock-prices',
@@ -22,4 +23,11 @@ export class StockPricesComponent {
     new Date(Date.now() + (90 * 60 * 1000)),
     new Date(Date.now() + (120 * 60 * 1000)),
   ]
+
+  constructor(service: BackendService) {
+    const data = service.getData()
+    console.log(data)
+    data.subscribe(d => console.log(d))
+  }
+
 }
