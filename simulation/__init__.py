@@ -1,6 +1,7 @@
 import numpy as np
 from .noise_generator import NoiseGenerator
 from .simulation import Simulation
+import logging
 
 def from_config(drinks, seed, noise_variance, noise_max, **kwargs):
     # generate seeds for each simulation using the seed form the config

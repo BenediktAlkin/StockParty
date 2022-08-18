@@ -1,21 +1,26 @@
+import sys
 import yaml
 from flask import Flask
 import simulation
 from container import container
+import logging
 
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
-    return "<p>Hello, World!</p>"
-
 @app.route("/get_data")
 def get_data():
-    return dict(
-        data={sim.name: sim.values for sim in container.sims},
-        tick_interval=container.sims[0].tick_interval,
-    )
+    return {
+        i: dict(
+            id=i,
+            name=sim.name,
+            tick_interval=sim.tick_interval,
+            start_time=sim.start_time,
+            end_time=sim.end_time,
+            prices=sim.values,
+        )
+        for i, sim in enumerate(container.sims)
+    }
 
 @app.route("/get_config_ui")
 def get_config_ui():
@@ -25,7 +30,20 @@ def get_config_ui():
 def get_config_simulation():
     return container.config_simulation
 
+def setup_logging():
+    stdout_handler = logging.StreamHandler(stream=sys.stdout)
+    formatter = logging.Formatter(
+        fmt='%(asctime)s %(levelname).1s %(message)s',
+        datefmt='%m-%d %H:%M:%S'
+    )
+    stdout_handler.setFormatter(formatter)
+    app.logger.setLevel(logging.INFO)
+    stdout_handler.setLevel(logging.INFO)
+    app.logger.handlers.clear()
+    app.logger.addHandler(stdout_handler)
+
 def main():
+    setup_logging()
     with open("config_simulation.yaml") as f:
         config_simulation = yaml.safe_load(f)
     container.config_simulation = config_simulation

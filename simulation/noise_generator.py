@@ -1,5 +1,8 @@
 import numpy as np
 import scipy.stats as stats
+import logging
+
+logger = logging.getLogger("app.noise_generator")
 
 class NoiseGenerator:
     def __init__(self, seed, noise_variance, noise_max):
@@ -14,5 +17,5 @@ class NoiseGenerator:
             noise = self.rng.normal(0, self.noise_variance)
             if abs(noise) < self.noise_max:
                 return noise
-        print(f"noise generation failed noise_variance={self.noise_variance} noise_max={self.noise_max}")
+        logger.info(f"noise generation failed noise_variance={self.noise_variance} noise_max={self.noise_max}")
         return 0.

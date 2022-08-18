@@ -1,6 +1,9 @@
 import numpy as np
 import datetime
 from .point import Point
+import logging
+
+logger = logging.getLogger("app.simulation")
 
 class Simulation:
     @staticmethod
@@ -30,9 +33,9 @@ class Simulation:
         self.cur_point_tick = 1
         self.slope = self.get_slope(self.points[0], self.points[1])
 
-        print(f"simulating {self.name} with tick_interval={self.tick_interval}")
+        logger.info(f"simulating {self.name} with tick_interval={self.tick_interval}")
         self.simulate()
-        print(f"simulated {self.name} (len={len(self.values)})")
+        logger.info(f"simulated {self.name} (len={len(self.values)})")
 
     def simulate(self):
         while not self.is_finished:
