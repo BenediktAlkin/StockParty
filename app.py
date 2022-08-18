@@ -15,8 +15,8 @@ def get_data():
             id=i,
             name=sim.name,
             tick_interval=sim.tick_interval,
-            start_time=sim.start_time,
-            end_time=sim.end_time,
+            start_time=sim.start_time.strftime(f"%Y-%m-%d %H:%M:%S"),
+            end_time=sim.end_time.strftime(f"%Y-%m-%d %H:%M:%S"),
             prices=sim.values,
         )
         for i, sim in enumerate(container.sims)
