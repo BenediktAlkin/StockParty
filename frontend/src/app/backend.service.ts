@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
+
+export interface StockPriceData {
+  id: number
+  name: string
+  tickInterval: number
+  prices: number[]
+  times: Date[]
+}
 
 interface DrinkPrices {
   drink: string
@@ -26,8 +34,15 @@ export class BackendService {
   constructor(private http: HttpClient) {
   }
 
-  getData() {
-    return this.http.get("/api/get_data")
+  getData(): Observable<StockPriceData[]> {
+    return this.http.get<StockPriceData[]>("/api/get_data")
+      .pipe(
+        map(data => {
+          for (let i = 0; i < data.length; i++)
+            data[i].times = data[i].times.map(t => new Date(t))
+          return data
+        })
+      )
   }
 
   getDataFromBackend() {

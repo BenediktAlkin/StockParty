@@ -29,6 +29,7 @@ class Simulation:
 
         # initialize sim
         self.values = [self.points[0].value]
+        self.times = [self.points[0].time]
         self.cur_point_idx = 0
         self.cur_point_tick = 1
         self.slope = self.get_slope(self.points[0], self.points[1])
@@ -84,7 +85,8 @@ class Simulation:
 
         new_value = self.values[-1] + delta
 
-        self.values += [new_value]
+        self.values.append(new_value)
+        self.times.append(self.times[0] + datetime.timedelta(milliseconds=self.tick_interval * (len(self.times) - 1)))
 
         self.cur_point_tick += 1
         if self.cur_point_tick >= self.point_ticks[self.cur_point_idx]:

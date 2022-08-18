@@ -1,26 +1,25 @@
 import sys
 import yaml
-from flask import Flask
+from flask import Flask, jsonify
 import simulation
 from container import container
 import logging
 
 app = Flask(__name__)
 
-
 @app.route("/api/get_data")
 def get_data():
-    return {
-        i: dict(
+    result = jsonify([
+        dict(
             id=i,
             name=sim.name,
-            tick_interval=sim.tick_interval,
-            start_time=sim.start_time.strftime(f"%Y-%m-%d %H:%M:%S"),
-            end_time=sim.end_time.strftime(f"%Y-%m-%d %H:%M:%S"),
+            tickInterval=sim.tick_interval,
             prices=sim.values,
+            times=list(map(lambda time: int(time.timestamp() * 1000), sim.times))
         )
         for i, sim in enumerate(container.sims)
-    }
+    ])
+    return result
 
 @app.route("/get_config_ui")
 def get_config_ui():
@@ -44,11 +43,11 @@ def setup_logging():
 
 def main():
     setup_logging()
-    with open("config_simulation.yaml") as f:
+    with open("config_simulation.yaml", encoding="utf-8") as f:
         config_simulation = yaml.safe_load(f)
     container.config_simulation = config_simulation
     container.sims = simulation.from_config(**config_simulation)
-    with open("config_ui.yaml") as f:
+    with open("config_ui.yaml", encoding="utf-8") as f:
         config_ui = yaml.safe_load(f)
     container.config_ui = config_ui
     app.run()

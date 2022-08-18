@@ -1,5 +1,4 @@
 <div class="full-screen-grid">
-    <customer-stock-price [id]="stockPriceData.id" [name]="stockPriceData.name" [x]="stockPriceDates"
-        [y]="stockPriceData.x" *ngFor="let stockPriceData of stockPriceDataArray">
+    <customer-stock-price [data]="stockPriceData" *ngFor="let stockPriceData of stockPriceDataArray">
     </customer-stock-price>
 </div>

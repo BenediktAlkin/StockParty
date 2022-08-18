@@ -1,6 +1,5 @@
-### frontend
 - maybe price and drinkname should be swapped
-
+- make sure prices cant fluctuate
 
 
 ### meeting notes

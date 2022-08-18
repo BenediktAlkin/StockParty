@@ -1,5 +1,6 @@
 import { PropertyRead } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
+import { StockPriceData } from 'src/app/backend.service';
 import * as d3 from 'd3';
 
 @Component({
@@ -8,33 +9,39 @@ import * as d3 from 'd3';
   styleUrls: ['./stock-price.component.css']
 })
 export class StockPriceComponent implements OnInit {
+  // plot configuration
+  private historyMinutes: number = 60;
+
+
   @Input()
-  public id: number = -1;
-  public idString: string = "";
-  @Input()
-  public name: string = "";
-  @Input()
-  public x: Date[] = [];
-  @Input()
-  public y: number[] = [];
+  public data: StockPriceData;
+  public idString: string;
+  private historyTicks: number;
+  private startTime: Date;
+
 
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.idString = `id${this.id}`
-    // console.log(this.id)
-    // console.log(this.name)
-    // console.log(this.x)
-    // console.log(this.y)
+    console.log(this.data)
+    console.log("id: " + this.data.id.toString())
+    console.log("name: " + this.data.name)
+    this.idString = `id${this.data.id}`
+    this.startTime = this.data.times[0]
+    this.historyTicks = this.historyMinutes * 60 * 1000 / this.data.tickInterval
+    console.log("tick interval: " + this.data.tickInterval.toString())
+    console.log("history minutes: " + this.historyMinutes.toString())
+    console.log("history ticks: " + this.historyTicks.toString())
+
     this.createSvg()
-    setInterval(() => this.createSvg(), 1000)
+    // NOTE: this is not totally in sync with the real clock 
+    // e.g. if tickInterval == 2000 and the interval starts at 00:00:01 while the sim starts at 00:00:00 it will be off by 1 second
+    setInterval(() => this.createSvg(), this.data.tickInterval)
   }
 
   private createSvg(): void {
-    //console.log(this)
-    //console.log("tick")
     // line styling
     const lineColor = "red"
     // price range rectangle styling
@@ -50,21 +57,18 @@ export class StockPriceComponent implements OnInit {
     const yticksFontSize = 24
 
 
+    // width/height are only relevant for aspect ratio
     const width = 600
     const height = 400
-    //const figure = d3.select(`#${this.idString}`)
+    // create/recreate svg
     const figures = d3.selectAll("figure")
-    // console.log(figures)
-    const figure = figures.filter((_, i) => i === this.id)
-    // console.log(figure)
+    const figure = figures.filter((_, i) => i === this.data.id)
     const figureChilds = figure.selectAll("*")
-    // console.log(figureChilds)
     figureChilds.remove()
     const svg = figure
       .append("svg")
       .attr("viewBox", [0, 0, width, height])
       .attr("style", "max-width: 100%; height: auto;");
-    //.attr("style", "width: 100%; height: 100%;");
 
 
     const marginTop = titleMarginTop + titleFontSize + 5
@@ -74,9 +78,18 @@ export class StockPriceComponent implements OnInit {
     const xRange = [marginLeft, width - marginRight]
     const yRange = [height - marginBottom, marginTop]
 
+    // compute which data to show
+    const maxIdx = (Date.now() - this.startTime.getTime()) / this.data.tickInterval
+    const minIdx = Math.max(0, maxIdx - this.historyTicks)
+    const x = this.data.times.slice(minIdx, maxIdx)
+    const ogY = this.data.prices.slice(minIdx, maxIdx)
+    // y is offset by 0.25
+    const y = ogY.map(t => t + 0.25)
+
+    console.log(y)
 
     // Compute domains.
-    const xDomain = d3.extent(this.x) as [Date, Date];
+    const xDomain = d3.extent(x) as [Date, Date];
     const yDomain = [1.25, 4.75];
 
     // Construct scales and axes.
@@ -109,11 +122,11 @@ export class StockPriceComponent implements OnInit {
         .attr("y", -rectHeight / 2)
         .attr("height", rectHeight)
         .attr("fill", i => (i as number) % 1 == 0 ? rectColor1 : rectColor2)
-        .attr("opacity", i => Math.abs(this.y[this.y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral))
+        .attr("opacity", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral))
       // increase font size of yticks and make current price bold
       .call(g => g.selectAll("text")
         .attr("font-size", `${yticksFontSize}px`)
-        .attr("font-weight", i => Math.abs(this.y[this.y.length - 1] - (i as number)) < 0.25 ? "bold" : "normal"));
+        .attr("font-weight", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? "bold" : "normal"));
     // remove bar of y-axis
     //.call(g => g.select(".domain").remove()) 
     // draw horizontal grid lines (at exact price points)
@@ -123,11 +136,11 @@ export class StockPriceComponent implements OnInit {
 
 
     // Construct a line generator.
-    const I = d3.range(this.x.length);
+    const I = d3.range(x.length);
     const line = d3.line<number>()
       .curve(d3.curveLinear)
-      .x(i => xScale(this.x[i]))
-      .y(i => yScale(this.y[i]));
+      .x(i => xScale(x[i]))
+      .y(i => yScale(y[i]));
     // draw price line
     svg.append("path")
       .attr("fill", "none")
@@ -139,12 +152,12 @@ export class StockPriceComponent implements OnInit {
       .attr("d", line(I));
 
     // add title
-    const price = Math.round(this.y[this.y.length - 1] * 2) / 2
+    const price = Math.round(y[y.length - 1] * 2) / 2
     svg.append("text")
       .attr("x", (width / 2))
       .attr("y", titleMarginTop + titleFontSize)
       .attr("text-anchor", "middle")
       .style("font-size", `${titleFontSize}px`)
-      .text(`${this.name} ${twoDecimalFormatter(price)}€`);
+      .text(`${this.data.name} ${twoDecimalFormatter(price)}€`);
   }
 }

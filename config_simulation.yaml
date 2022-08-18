@@ -14,9 +14,9 @@ drinks:
       time: "14:00"
     - value: 2.5
       time: "23:50"
-    - value: 1.0
+    - value: 2.0
       time: "00:00"
-    - value: 1.0
+    - value: 2.0
       time: "00:30"
     - value: 2.5
       time: "00:40"
@@ -28,9 +28,9 @@ drinks:
       time: "14:00"
     - value: 3.0
       time: "23:50"
-    - value: 1.0
+    - value: 2.0
       time: "00:00"
-    - value: 1.0
+    - value: 2.0
       time: "00:30"
     - value: 3.0
       time: "00:40"
@@ -42,9 +42,9 @@ drinks:
       time: "14:00"
     - value: 2.5
       time: "23:50"
-    - value: 1.0
+    - value: 2.0
       time: "00:00"
-    - value: 1.0
+    - value: 2.0
       time: "00:30"
     - value: 2.5
       time: "00:40"
@@ -70,9 +70,9 @@ drinks:
       time: "14:00"
     - value: 3.5
       time: "23:50"
-    - value: 1.0
+    - value: 2.0
       time: "00:00"
-    - value: 1.0
+    - value: 2.0
       time: "00:30"
     - value: 2.5
       time: "00:40"
@@ -84,9 +84,9 @@ drinks:
       time: "14:00"
     - value: 3.0
       time: "23:50"
-    - value: 1.0
+    - value: 2.0
       time: "00:00"
-    - value: 1.0
+    - value: 2.0
       time: "00:30"
     - value: 2.5
       time: "00:40"
