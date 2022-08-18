@@ -36,7 +36,7 @@ class Simulation:
 
         logger.info(f"simulating {self.name} with tick_interval={self.tick_interval}")
         self.simulate()
-        logger.info(f"simulated {self.name} (len={len(self.values)})")
+        logger.info(f"simulated {self.name} (len={len(self.values)} min={min(self.values)} max={max(self.values)})")
 
     def simulate(self):
         while not self.is_finished:

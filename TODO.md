@@ -1,6 +1,6 @@
 - maybe price and drinkname should be swapped
 - make sure prices cant fluctuate
-
+- backup price list (outage)
 
 ### meeting notes
 sync config with all devices
