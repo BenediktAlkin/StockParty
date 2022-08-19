@@ -17,5 +17,9 @@ class NoiseGenerator:
             noise = self.rng.normal(0, self.noise_variance)
             if abs(noise) < self.noise_max:
                 return noise
-        logger.info(f"noise generation failed noise_variance={self.noise_variance} noise_max={self.noise_max}")
+        logger.warning(f"noise generation failed noise_variance={self.noise_variance} noise_max={self.noise_max}")
         return 0.
+
+    def should_pull(self, p):
+        return self.rng.uniform() < p
+        # return self.rng.beta(a=1, b=0.1) < p

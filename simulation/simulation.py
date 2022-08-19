@@ -33,6 +33,8 @@ class Simulation:
         self.cur_point_idx = 0
         self.cur_point_tick = 1
         self.slope = self.get_slope(self.points[0], self.points[1])
+        self.logger.debug(f"initial slope: {self.slope}")
+        self.logger.debug(f"cur_point {self.points[0].value} -> next_point {self.points[1].value}")
 
         self.logger.info(f"simulating {self.name} with tick_interval={self.tick_interval}")
         self.simulate()
@@ -70,30 +72,53 @@ class Simulation:
             return
 
         # generate noise
-        noise = self.noise_generator.generate_noise()
-        delta = self.slope * self.tick_interval / 1000 + noise
+        # noise = self.noise_generator.generate_noise()
+        # delta = self.slope * self.tick_interval / 1000 + noise
+        delta = self.noise_generator.generate_noise()
 
-        # prevent price switch if next price is equal to current
-        if self._should_prevent_price_switch:
-            proposed_price = self.get_price(self.values[-1] + delta)
-            old_price = self.get_price(self.values[-1])
-            # push price to current price if it is not (if noise in transition phase favours one side)
-            cur_value = self.points[self.cur_point_idx].value
-            if old_price != cur_value:
-                if delta * (cur_value - old_price) < 0:
-                    delta *= -1
-            elif proposed_price != old_price:
-                # prevent price switches
+        old_value = self.values[-1]
+        self.logger.debug(f"old_value: {old_value:.4f}")
+        self.logger.debug(f"proposed_delta: {delta:.4f}")
+        old_price = self.get_price(old_value)
+        #self.logger.debug(f"old_price: {old_price}")
+        expected_price = self.points[self.cur_point_idx + 1].value
+        self.logger.debug(f"expected_price: {expected_price}")
+
+        # pull towards center (if price is what it's supposed to be)
+        if old_price == expected_price:
+            direction_to_center = np.sign(expected_price - old_value)
+            if direction_to_center != 0:
+                delta_direction = np.sign(delta)
+                if direction_to_center != delta_direction:
+                    # pull_factor in [0, 0.25]
+                    # I tried pull_factor in [0, 1.0] but this is way too strong as for small slopes
+                    # the value would collapse way faster then the slope to the last 0.5 price
+                    # e.g. if transitioning from 2.0 to 1.5 within an hour it takes ~30min to move from
+                    # 2.0 to 1.74 and then the price instantly gets pulled towards 1.5
+                    pull_factor = abs(old_value - expected_price)
+                    self.logger.debug(f"pull_factor: {pull_factor}")
+                    # change direction with <pull_factor> probability
+                    if self.noise_generator.should_pull(p=pull_factor):
+                        self.logger.debug(f"pull")
+                        delta *= -1
+
+        # hard prevention on price switches (centerpull is only soft prevention)
+        if old_price == expected_price:
+            proposed_price = self.get_price(old_value + delta)
+            if proposed_price != expected_price:
+                self.logger.debug("prevent price switch")
                 delta *= -1
 
-        # prevent oscilation around price thresholds
-        # if slope is positive --> price cannot get lower
-        # if slope is negative --> price cannot get higher
-        #if (self.slope > 0 and old_price > proposed_price) or \
-        #    (self.slope < 0 and old_price < proposed_price):
-        #    delta *= -1
+        # prevent price from going into the opposite direction of the slope
+        if old_price != expected_price:
+            proposed_price = self.get_price(old_value + delta)
+            price_direction = np.sign(proposed_price - old_price)
+            if price_direction != 0. and price_direction != np.sign(self.slope):
+                self.logger.debug("prevent opposite slope direction")
+                delta *= -1
 
-        new_value = self.values[-1] + delta
+        self.logger.debug(f"delta: {delta:.4f}")
+        new_value = self.values[-1] + self.slope + delta
 
         self.values.append(new_value)
         self.times.append(self.times[0] + datetime.timedelta(milliseconds=self.tick_interval * (len(self.times) - 1)))
@@ -102,12 +127,18 @@ class Simulation:
         if self.cur_point_tick >= self.point_ticks[self.cur_point_idx]:
             self.cur_point_tick = 0
             self.cur_point_idx += 1
-            self.slope = self.get_slope(self.points[self.cur_point_idx - 1], self.points[self.cur_point_idx])
+            if self.cur_point_idx + 1 < len(self.points):
+                cur_point = self.points[self.cur_point_idx]
+                next_point = self.points[self.cur_point_idx + 1]
+                self.slope = self.get_slope(cur_point, next_point)
+                self.logger.debug(f"new point {self.cur_point_idx} slope={self.slope}")
+                self.logger.debug(f"cur_point {cur_point.value} -> next_point {next_point.value}")
+            else:
+                self.logger.debug(f"last point reached")
 
-    @staticmethod
-    def get_slope(p1, p2):
+    def get_slope(self, p1, p2):
         time_delta = p2.time - p1.time
-        return (p2.value - p1.value) / time_delta.seconds
+        return (p2.value - p1.value) / (time_delta.seconds * 1000 / self.tick_interval)
 
     @staticmethod
     def get_price(value):
