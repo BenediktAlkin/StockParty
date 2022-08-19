@@ -6,7 +6,7 @@ import { BackendService, StockPriceData } from 'src/app/backend.service';
   templateUrl: './stock-prices.component.html',
   styleUrls: ['./stock-prices.component.css']
 })
-export class StockPricesComponent {
+export class StockPricesComponent implements OnInit {
   stockPriceDataArray: StockPriceData[] = [];
   // stockPriceDataArray = [
   //   { id: 0, name: "Cola Rum", x: [2, 2, 3, 4] },

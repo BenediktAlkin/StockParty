@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { BackendService, BartenderDrinkInfo } from 'src/app/backend.service';
+import { BackendService, StockPriceData } from 'src/app/backend.service';
 
 @Component({
   selector: 'bartender-drinks',
@@ -7,7 +7,7 @@ import { BackendService, BartenderDrinkInfo } from 'src/app/backend.service';
   styleUrls: ['./bartender-drinks.component.css']
 })
 export class BartenderDrinksComponent implements OnInit, OnDestroy {
-  service: BackendService
+  stockPriceDataArray: StockPriceData[] = [];
   cols = 2
   columnGap = 5
   primaryFontSize = 90
@@ -18,18 +18,16 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
   private clickedOnClose = false
   private automaticallyCloseSettingsTimer: any
 
-  bartenderDrinkInfos?: BartenderDrinkInfo[]
+  constructor(private service: BackendService) { }
 
-  constructor(service: BackendService) {
-    this.service = service
-  }
 
   ngOnInit(): void {
-    this.service.getDataFromBackend()
-    this.refresh()
-    // this.timer = setInterval(() => this.refresh(), this.service.refreshInterval)
-    this.isLoaded = true
+    this.service.getData().subscribe(d => {
+      this.stockPriceDataArray = d
+      this.isLoaded = true
+    })
   }
+
   ngOnDestroy(): void {
     // clearInterval(this.timer)
   }
@@ -49,10 +47,6 @@ export class BartenderDrinksComponent implements OnInit, OnDestroy {
 
     if (!calledFromInterval)
       this.clickedOnClose = true
-  }
-
-  refresh() {
-    this.bartenderDrinkInfos = this.service.getBartenderDrinkInfos()
   }
 
   @HostListener('document:click')

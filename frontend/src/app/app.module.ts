@@ -20,6 +20,7 @@ import { StockPricesComponent } from './customer/stock-prices/stock-prices.compo
 import { StockPriceComponent } from './customer/stock-price/stock-price.component';
 import { StockPricesFullComponent } from './customer/stock-prices-full/stock-prices-full.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { BartenderDrinkComponent } from './bartender/bartender-drink/bartender-drink.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     StockPriceComponent,
     StockPricesFullComponent,
     NavigationComponent,
+    BartenderDrinkComponent,
   ],
   imports: [
     BrowserModule,

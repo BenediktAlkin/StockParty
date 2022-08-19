@@ -1,0 +1,17 @@
+.drink-text {
+    background-color: red;
+}
+
+.price-text {
+    background-color: green;
+    justify-self: end;
+}
+
+.slope-info {
+    display: flex;
+    align-items: center;
+}
+
+.arrow {
+    background-color: purple;
+}

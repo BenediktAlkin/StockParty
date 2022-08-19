@@ -69,25 +69,7 @@
 
 <div *ngIf="isLoaded === true">
     <div class="drink-info" [ngStyle]="{'grid-template-columns': getColsStyle(), 'column-gap': columnGap+'em'}">
-        <div class="drink-info-item" *ngFor="let bartenderDrinkInfo of bartenderDrinkInfos">
-            <div class="drink-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
-                {{ bartenderDrinkInfo.drink }}
-            </div>
-            <div class="price-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
-                {{ bartenderDrinkInfo.roundedPrice }}€
-            </div>
-            <div class="slope-info" [ngStyle]="{'font-size': secondaryFontSize+'px'}"
-                *ngIf="showSecondaryText === true">
-                {{ bartenderDrinkInfo.price }}€
-                <mat-icon class="arrow"
-                    [ngStyle]="{'font-size': secondaryFontSize+'px', 'height': secondaryFontSize+'px', 'width': secondaryFontSize+'px'}">
-                    arrow_right_alt
-                </mat-icon>
-                {{ bartenderDrinkInfo.expectedPrice }}€
-            </div>
-            <div [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
-                slope={{ bartenderDrinkInfo.slope }}
-            </div>
-        </div>
+        <bartender-drink [data]="stockPriceData" *ngFor="let stockPriceData of stockPriceDataArray">
+        </bartender-drink>
     </div>
 </div>

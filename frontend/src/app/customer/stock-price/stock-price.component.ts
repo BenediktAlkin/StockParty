@@ -1,4 +1,3 @@
-import { PropertyRead } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { StockPriceData } from 'src/app/backend.service';
 import * as d3 from 'd3';
