@@ -54,23 +54,33 @@ class Simulation:
     def is_finished(self):
         return self.cur_point_idx >= len(self.point_ticks)
 
+    @property
+    def _should_prevent_price_switch(self):
+        # first price should never switch
+        if self.cur_point_idx == 0:
+            return True
+        cur_value = self.points[self.cur_point_idx].value
+        prev_value = self.points[self.cur_point_idx - 1].value
+        if cur_value == prev_value:
+            return True
+        return False
+
     def tick(self):
         if self.is_finished:
             return
 
         # generate noise
         noise = self.noise_generator.generate_noise()
-
         delta = self.slope * self.tick_interval / 1000 + noise
-        proposed_price = self.get_price(self.values[-1] + delta)
-        old_price = self.get_price(self.values[-1])
 
         # prevent price switch if next price is equal to current
-        if self.cur_point_idx == 0 or \
-                self.points[self.cur_point_idx].value == self.points[self.cur_point_idx - 1].value:
+        if self._should_prevent_price_switch:
+            proposed_price = self.get_price(self.values[-1] + delta)
+            old_price = self.get_price(self.values[-1])
             # push price to current price if it is not (if noise in transition phase favours one side)
-            if old_price != self.points[self.cur_point_idx].value:
-                if delta * (self.points[self.cur_point_idx].value - old_price) < 0:
+            cur_value = self.points[self.cur_point_idx].value
+            if old_price != cur_value:
+                if delta * (cur_value - old_price) < 0:
                     delta *= -1
             elif proposed_price != old_price:
                 # prevent price switches
