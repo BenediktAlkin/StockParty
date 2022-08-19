@@ -18,6 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender-drinks.component';
 import { StockPricesComponent } from './customer/stock-prices/stock-prices.component';
 import { StockPriceComponent } from './customer/stock-price/stock-price.component';
+import { StockPricesFullComponent } from './customer/stock-prices-full/stock-prices-full.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { StockPriceComponent } from './customer/stock-price/stock-price.componen
     BartenderDrinksComponent,
     StockPricesComponent,
     StockPriceComponent,
+    StockPricesFullComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

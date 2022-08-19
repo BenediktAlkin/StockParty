@@ -25,8 +25,7 @@ export class StockPricesComponent {
   //   new Date(Date.now() + (120 * 60 * 1000)),
   // ]
 
-  constructor(private service: BackendService) {
-  }
+  constructor(private service: BackendService) { }
 
 
   ngOnInit(): void {

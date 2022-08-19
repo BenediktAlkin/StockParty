@@ -15,16 +15,18 @@ export class StockPriceComponent implements OnInit {
 
   @Input()
   public data: StockPriceData;
+  @Input()
+  public showFullTrajectory: boolean;
   public idString: string;
   private historyTicks: number;
   private startTime: Date;
 
 
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
+    console.log("showFullTrajectory: " + this.showFullTrajectory.toString())
     console.log(this.data)
     console.log("id: " + this.data.id.toString())
     console.log("name: " + this.data.name)
@@ -79,14 +81,18 @@ export class StockPriceComponent implements OnInit {
     const yRange = [height - marginBottom, marginTop]
 
     // compute which data to show
-    const maxIdx = (Date.now() - this.startTime.getTime()) / this.data.tickInterval
-    const minIdx = Math.max(0, maxIdx - this.historyTicks)
-    const x = this.data.times.slice(minIdx, maxIdx)
-    const ogY = this.data.prices.slice(minIdx, maxIdx)
+    let x = this.data.times
+    let ogY = this.data.prices
+    if (!this.showFullTrajectory) {
+      const maxIdx = (Date.now() - this.startTime.getTime()) / this.data.tickInterval
+      const minIdx = Math.max(0, maxIdx - this.historyTicks)
+      x = this.data.times.slice(minIdx, maxIdx)
+      ogY = this.data.prices.slice(minIdx, maxIdx)
+    }
     // y is offset by 0.25
     const y = ogY.map(t => t + 0.25)
 
-    console.log(y)
+    //console.log(y)
 
     // Compute domains.
     const xDomain = d3.extent(x) as [Date, Date];
