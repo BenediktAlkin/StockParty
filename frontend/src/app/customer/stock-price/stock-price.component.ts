@@ -82,15 +82,13 @@ export class StockPriceComponent implements OnInit {
 
     // compute which data to show
     let x = this.data.times
-    let ogY = this.data.prices
+    let y = this.data.prices
     if (!this.showFullTrajectory) {
       const maxIdx = (Date.now() - this.startTime.getTime()) / this.data.tickInterval
       const minIdx = Math.max(0, maxIdx - this.historyTicks)
       x = this.data.times.slice(minIdx, maxIdx)
-      ogY = this.data.prices.slice(minIdx, maxIdx)
+      y = this.data.prices.slice(minIdx, maxIdx)
     }
-    // y is offset by 0.25
-    const y = ogY.map(t => t + 0.25)
 
     //console.log(y)
 
@@ -103,7 +101,8 @@ export class StockPriceComponent implements OnInit {
     const xScale = d3.scaleTime().domain(xDomain).range(xRange);
     const yScale = d3.scaleLinear(yDomain, yRange);
     const timeFormatter = d3.timeFormat("%H:%M")
-    const xAxis = d3.axisBottom(xScale).tickFormat(d => timeFormatter(d as Date)).ticks(d3.timeMinute.every(15));
+    const xTicks = this.showFullTrajectory ? d3.timeHour.every(2) : d3.timeMinute.every(15)
+    const xAxis = d3.axisBottom(xScale).tickFormat(d => timeFormatter(d as Date)).ticks(xTicks);
     const twoDecimalFormatter = d3.format(".2f")
     const yAxis = d3.axisLeft(yScale).ticks(yTicks).tickFormat(t => `${twoDecimalFormatter(t)}€`);
 
@@ -163,6 +162,7 @@ export class StockPriceComponent implements OnInit {
       .attr("x", (width / 2))
       .attr("y", titleMarginTop + titleFontSize)
       .attr("text-anchor", "middle")
+      .attr("font-weight", "bold")
       .style("font-size", `${titleFontSize}px`)
       .text(`${this.data.name} ${twoDecimalFormatter(price)}€`);
   }
