@@ -3,7 +3,6 @@ import datetime
 from .point import Point
 import logging
 
-logger = logging.getLogger("app.simulation")
 
 class Simulation:
     @staticmethod
@@ -12,6 +11,7 @@ class Simulation:
         return Simulation(points=point_objs, **kwargs)
 
     def __init__(self, name, points, noise_generator, tick_interval):
+        self.logger = logging.getLogger("app.simulation")
         self.name = name
         self.points = points
         self.tick_interval = tick_interval
@@ -34,9 +34,9 @@ class Simulation:
         self.cur_point_tick = 1
         self.slope = self.get_slope(self.points[0], self.points[1])
 
-        logger.info(f"simulating {self.name} with tick_interval={self.tick_interval}")
+        self.logger.info(f"simulating {self.name} with tick_interval={self.tick_interval}")
         self.simulate()
-        logger.info(f"simulated {self.name} (len={len(self.values)} min={min(self.values)} max={max(self.values)})")
+        self.logger.info(f"simulated {self.name} (len={len(self.values)} min={min(self.values)} max={max(self.values)})")
 
     def simulate(self):
         while not self.is_finished:
