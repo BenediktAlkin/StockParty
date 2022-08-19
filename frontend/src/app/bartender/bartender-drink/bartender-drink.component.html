@@ -1,18 +1,17 @@
-<p>works</p>
-<!-- <div class="drink-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
-    {{ bartenderDrinkInfo.drink }}
+<div class="drink-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
+    {{ data.name }}
 </div>
 <div class="price-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
-    {{ bartenderDrinkInfo.roundedPrice }}€
+    {{ price }}€ {{ slopeSign }}
 </div>
-<div class="slope-info" [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
-    {{ bartenderDrinkInfo.price }}€
+<!-- <div class="slope-info" [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
+    {{ price }}€
     <mat-icon class="arrow"
         [ngStyle]="{'font-size': secondaryFontSize+'px', 'height': secondaryFontSize+'px', 'width': secondaryFontSize+'px'}">
         arrow_right_alt
     </mat-icon>
-    {{ bartenderDrinkInfo.expectedPrice }}€
-</div>
+    {{ price }}€
+</div> 
 <div [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
-    slope={{ bartenderDrinkInfo.slope }}
+    slope={{ slopeSign }}
 </div> -->

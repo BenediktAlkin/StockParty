@@ -15,6 +15,7 @@ def get_data():
             name=sim.name,
             tickInterval=sim.tick_interval,
             prices=sim.values,
+            slopeSigns=sim.slope_signs,
             times=list(map(lambda time: int(time.timestamp() * 1000), sim.times))
         )
         for i, sim in enumerate(container.sims)

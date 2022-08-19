@@ -8,6 +8,7 @@ export interface StockPriceData {
   name: string
   tickInterval: number
   prices: number[]
+  slopeSigns: number[]
   times: Date[]
 }
 

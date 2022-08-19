@@ -28,11 +28,12 @@ class Simulation:
         ]
 
         # initialize sim
+        self.slope = self.get_slope(self.points[0], self.points[1])
         self.values = [self.points[0].value]
         self.times = [self.points[0].time]
+        self.slope_signs = [int(np.sign(self.slope))]
         self.cur_point_idx = 0
         self.cur_point_tick = 1
-        self.slope = self.get_slope(self.points[0], self.points[1])
         self.logger.debug(f"initial slope: {self.slope}")
         self.logger.debug(f"cur_point {self.points[0].value} -> next_point {self.points[1].value}")
 
@@ -122,6 +123,7 @@ class Simulation:
 
         self.values.append(new_value)
         self.times.append(self.times[0] + datetime.timedelta(milliseconds=self.tick_interval * (len(self.times) - 1)))
+        self.slope_signs.append(int(np.sign(self.slope)))
 
         self.cur_point_tick += 1
         if self.cur_point_tick >= self.point_ticks[self.cur_point_idx]:

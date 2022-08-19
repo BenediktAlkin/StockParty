@@ -3,6 +3,7 @@
 }
 
 .price-text {
+    display: flex;
     background-color: green;
     justify-self: end;
 }

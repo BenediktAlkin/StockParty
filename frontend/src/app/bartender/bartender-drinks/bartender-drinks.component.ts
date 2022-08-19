@@ -9,10 +9,10 @@ import { BackendService, StockPriceData } from 'src/app/backend.service';
 export class BartenderDrinksComponent implements OnInit, OnDestroy {
   stockPriceDataArray: StockPriceData[] = [];
   cols = 2
-  columnGap = 5
+  //columnGap = 5
   primaryFontSize = 90
   showSecondaryText = true
-  secondaryFontSize = 45
+  // secondaryFontSize = 45
   isLoaded = false
   showSettings = false
   private clickedOnClose = false
