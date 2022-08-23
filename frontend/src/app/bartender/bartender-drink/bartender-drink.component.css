@@ -1,18 +1,10 @@
-.drink-text {
-    background-color: red;
-}
-
 .price-text {
     display: flex;
-    background-color: green;
+    /* background-color: green; */
     justify-self: end;
 }
 
 .slope-info {
     display: flex;
     align-items: center;
-}
-
-.arrow {
-    background-color: purple;
 }
