@@ -20,12 +20,26 @@ export class BartenderDrinkComponent implements OnInit {
   public price: string;
   public slopeSign: string;
   private twoDecimalFormatter = d3.format(".2f")
+  private startTime: Date;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.price = this.twoDecimalFormatter(this.data.prices[0])
+    // console.log("data.prices: " + this.data.prices)
+    this.price = this.twoDecimalFormatter(this.getPrice(0))
     this.slopeSign = this.toSlopeSignText(this.data.slopeSigns[0])
+    this.startTime = this.data.times[0]
+    setInterval(() => this.updateData(), this.data.tickInterval)
+  }
+  private getPrice(idx: number): number {
+    return Math.round(this.data.prices[idx] * 2) / 2
+  }
+
+  private updateData(): void {
+    const idx = Math.floor((Date.now() - this.startTime.getTime()) / this.data.tickInterval)
+    //console.log(this.data.prices[idx])
+    this.price = this.twoDecimalFormatter(this.getPrice(idx))
+    this.slopeSign = this.toSlopeSignText(this.data.slopeSigns[idx])
   }
 
   toSlopeSignText(slopeSign: number): string {
