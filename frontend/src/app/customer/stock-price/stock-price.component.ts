@@ -52,7 +52,7 @@ export class StockPriceComponent implements OnInit {
     const rectColor2 = "#11a311"
     // title styling
     const titleMarginTop = 0
-    const titleFontSize = 36
+    const titleFontSize = 46
     // axis styling
     const xticksFontSize = 16
     const yticksFontSize = 24
@@ -60,7 +60,7 @@ export class StockPriceComponent implements OnInit {
 
     // width/height are only relevant for aspect ratio
     const width = 600
-    const height = 400
+    const height = 500
     // create/recreate svg
     const figures = d3.selectAll("figure")
     const figure = figures.filter((_, i) => i === this.data.id)
