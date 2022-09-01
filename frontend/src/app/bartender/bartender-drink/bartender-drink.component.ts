@@ -45,7 +45,7 @@ export class BartenderDrinkComponent implements OnInit {
   toSlopeSignText(slopeSign: number): string {
     if (slopeSign === 0) return "="
     if (slopeSign === 1) return "+"
-    if (slopeSign === -1) return "+"
+    if (slopeSign === -1) return "-"
     return "?"
   }
 
