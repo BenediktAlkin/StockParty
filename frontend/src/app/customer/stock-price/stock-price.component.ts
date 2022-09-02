@@ -42,9 +42,11 @@ export class StockPriceComponent implements OnInit {
     setInterval(() => this.createSvg(), this.data.tickInterval)
   }
 
+
   private createSvg(): void {
     // line styling
     const lineColor = "red"
+    const lineWidth = 2.5
     // price range rectangle styling
     const rectOpacityGeneral = 0.2
     const rectOpacityCurrentPrice = 0.8
@@ -52,15 +54,20 @@ export class StockPriceComponent implements OnInit {
     const rectColor2 = "#11a311"
     // title styling
     const titleMarginTop = 0
-    const titleFontSize = 46
+    const titleMarginBot = 15
+    const titleFontSize = 60
     // axis styling
-    const xticksFontSize = 16
-    const yticksFontSize = 24
+    let xticksFontSize = 36
+    if (this.showFullTrajectory) {
+      xticksFontSize = 24
+    }
+    const yticksFontSize = 36
+    const yticksFontSizeSelected = 42
 
 
     // width/height are only relevant for aspect ratio
     const width = 600
-    const height = 500
+    const height = 550
     // create/recreate svg
     const figures = d3.selectAll("figure")
     const figure = figures.filter((_, i) => i === this.data.id)
@@ -69,13 +76,21 @@ export class StockPriceComponent implements OnInit {
     const svg = figure
       .append("svg")
       .attr("viewBox", [0, 0, width, height])
-      .attr("style", "max-width: 100%; height: auto;");
+      .attr("style", "max-width: 100%; height: auto;")
+      .attr("border", "1px solid black");
+    // draw border around svg
+    svg.append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("stroke-width", 1)
+      .attr("fill", "transparent")
+      .attr("stroke", "black");
 
 
-    const marginTop = titleMarginTop + titleFontSize + 5
+    const marginTop = titleMarginTop + titleFontSize + titleMarginBot
     const marginRight = 0
-    const marginBottom = 30
-    const marginLeft = 80
+    const marginBottom = 40
+    const marginLeft = 120
     const xRange = [marginLeft, width - marginRight]
     const yRange = [height - marginBottom, marginTop]
 
@@ -129,7 +144,7 @@ export class StockPriceComponent implements OnInit {
         .attr("opacity", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? rectOpacityCurrentPrice : rectOpacityGeneral))
       // increase font size of yticks and make current price bold
       .call(g => g.selectAll("text")
-        .attr("font-size", `${yticksFontSize}px`)
+        .attr("font-size", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? `${yticksFontSizeSelected}px` : `${yticksFontSize}px`)
         .attr("font-weight", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? "bold" : "normal"));
     // remove bar of y-axis
     //.call(g => g.select(".domain").remove()) 
@@ -149,7 +164,7 @@ export class StockPriceComponent implements OnInit {
     svg.append("path")
       .attr("fill", "none")
       .attr("stroke", lineColor)
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", lineWidth)
       .attr("stroke-linecap", "round")
       .attr("stroke-linejoin", "round")
       .attr("stroke-opacity", 1)
@@ -158,7 +173,10 @@ export class StockPriceComponent implements OnInit {
     // add title
     const price = Math.round(y[y.length - 1] * 2) / 2
     svg.append("text")
-      .attr("x", (width / 2))
+      // center w.r.t plot
+      .attr("x", marginLeft / 2 + width / 2)
+      // center w.r.t svg
+      //.attr("x", width / 2)
       .attr("y", titleMarginTop + titleFontSize)
       .attr("text-anchor", "middle")
       .attr("font-weight", "bold")

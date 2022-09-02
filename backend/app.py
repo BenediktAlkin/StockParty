@@ -51,7 +51,7 @@ def main():
     with open("config_ui.yaml", encoding="utf-8") as f:
         config_ui = yaml.safe_load(f)
     container.config_ui = config_ui
-    app.run()
+    app.run(host="0.0.0.0")
 
 
 if __name__ == "__main__":
