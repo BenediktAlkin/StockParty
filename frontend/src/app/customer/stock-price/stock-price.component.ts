@@ -56,6 +56,7 @@ export class StockPriceComponent implements OnInit {
     const titleMarginTop = 0
     const titleMarginBot = 15
     const titleFontSize = 60
+    const titleFontSize2 = 50
     // axis styling
     let xticksFontSize = 36
     if (this.showFullTrajectory) {
@@ -108,10 +109,10 @@ export class StockPriceComponent implements OnInit {
 
     // Compute domains.
     const xDomain = d3.extent(x) as [Date, Date];
-    const yDomain = [1.25, 4.75];
+    const yDomain = [1.75, 4.75];
 
     // Construct scales and axes.
-    const yTicks = 7;
+    const yTicks = 6;
     const xScale = d3.scaleTime().domain(xDomain).range(xRange);
     const yScale = d3.scaleLinear(yDomain, yRange);
     const timeFormatter = d3.timeFormat("%H:%M")
@@ -174,13 +175,13 @@ export class StockPriceComponent implements OnInit {
     const price = Math.round(y[y.length - 1] * 2) / 2
     svg.append("text")
       // center w.r.t plot
-      .attr("x", marginLeft / 2 + width / 2)
+      //.attr("x", marginLeft / 2 + width / 2)
       // center w.r.t svg
-      //.attr("x", width / 2)
+      .attr("x", width / 2)
       .attr("y", titleMarginTop + titleFontSize)
       .attr("text-anchor", "middle")
       .attr("font-weight", "bold")
-      .style("font-size", `${titleFontSize}px`)
+      .style("font-size", this.data.name.length > 16 ? `${titleFontSize2}px` : `${titleFontSize}px`)
       .text(`${this.data.name} ${twoDecimalFormatter(price)}€`);
   }
 }
