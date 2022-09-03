@@ -31,9 +31,10 @@ def main():
     plt.plot(range(len(mins)), mins, label="min")
     plt.plot(range(len(mins)), maxs, label="max")
     plt.plot(range(len(mins)), avgs, label="avg")
-    xticks_interval = 60
+    xticks_interval = 30
     x = list(range(start_tick, end_tick + 1, every_n_ticks * xticks_interval))
-    plt.xticks(range(0, len(mins), xticks_interval), [sim0.times[i].time().strftime("%H:%M") for i in x])
+    xlabels = [sim0.times[idx].time().strftime("%H:%M") if i % 2 == 0 else "" for i, idx in enumerate(x)]
+    plt.xticks(range(0, len(mins), xticks_interval), xlabels)
     plt.show()
 
 
