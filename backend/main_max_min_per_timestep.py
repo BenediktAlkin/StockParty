@@ -1,6 +1,7 @@
 import yaml
 import simulation
 from container import container
+import matplotlib.pyplot as plt
 
 
 def main():
@@ -11,7 +12,7 @@ def main():
 
     ticks = len(container.sims[0].values)
     for tick in range(0, ticks, 30):
-        values = [sim.values[tick] for sim in container.sims]
+        values = [simulation.Simulation.get_price(sim.values[tick]) for sim in container.sims]
         timestep = container.sims[0].times[tick]
         print(f"{timestep}: {min(values):.2f}-{max(values):.2f}")
 
