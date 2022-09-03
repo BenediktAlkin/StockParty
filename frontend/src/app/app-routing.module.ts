@@ -7,7 +7,7 @@ import { BartenderDrinksComponent } from './bartender/bartender-drinks/bartender
 
 const routes: Routes = [
   { path: "stockprices", component: StockPricesComponent },
-  { path: "fullstockprices", component: StockPricesFullComponent },
+  { path: "topsecret", component: StockPricesFullComponent },
   { path: "bartender", component: BartenderDrinksComponent },
   { path: "**", component: NavigationComponent },
 ];

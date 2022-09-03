@@ -96,7 +96,7 @@ class Simulation:
                     # the value would collapse way faster then the slope to the last 0.5 price
                     # e.g. if transitioning from 2.0 to 1.5 within an hour it takes ~30min to move from
                     # 2.0 to 1.74 and then the price instantly gets pulled towards 1.5
-                    pull_factor = abs(old_value - expected_price)
+                    pull_factor = abs(old_value - expected_price) * 1.5
                     self.logger.debug(f"pull_factor: {pull_factor}")
                     # change direction with <pull_factor> probability
                     if self.noise_generator.should_pull(p=pull_factor):
