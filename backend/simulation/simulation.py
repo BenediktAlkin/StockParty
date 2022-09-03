@@ -75,7 +75,7 @@ class Simulation:
         # generate noise
         # noise = self.noise_generator.generate_noise()
         # delta = self.slope * self.tick_interval / 1000 + noise
-        delta = self.noise_generator.generate_noise()
+        delta = self.noise_generator.generate_noise() + self.slope
 
         old_value = self.values[-1]
         self.logger.debug(f"old_value: {old_value:.4f}")
@@ -119,7 +119,7 @@ class Simulation:
                 delta *= -1
 
         self.logger.debug(f"delta: {delta:.4f}")
-        new_value = self.values[-1] + self.slope + delta
+        new_value = self.values[-1] + delta
 
         self.values.append(new_value)
         self.times.append(self.times[0] + datetime.timedelta(milliseconds=self.tick_interval * (len(self.times) - 1)))
@@ -132,7 +132,8 @@ class Simulation:
             if self.cur_point_idx + 1 < len(self.points):
                 cur_point = self.points[self.cur_point_idx]
                 next_point = self.points[self.cur_point_idx + 1]
-                self.slope = self.get_slope(cur_point, next_point)
+                # * 2 for fast movement of prices
+                self.slope = self.get_slope(cur_point, next_point) * 2
                 self.logger.debug(f"new point {self.cur_point_idx} slope={self.slope}")
                 self.logger.debug(f"cur_point {cur_point.value} -> next_point {next_point.value}")
             else:
