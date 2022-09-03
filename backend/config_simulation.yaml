@@ -124,13 +124,13 @@ drinks:
       time: "20:00"
     - value: 3.0
       time: "20:30"
-    - value: 2.5
+    - value: 3.0
       time: "21:00"
     - value: 2.0
       time: "21:30"
     - value: 2.0
       time: "22:00"
-    - value: 2.5
+    - value: 3.5
       time: "22:30"
     - value: 3.0
       time: "23:00"
@@ -204,7 +204,7 @@ drinks:
       time: "02:00"
     - value: 3.0
       time: "02:15"
-    - value: 3.0
+    - value: 4.5
       time: "02:20"
     - value: 4.5
       time: "04:00"
@@ -262,9 +262,9 @@ drinks:
       time: "20:00"
     - value: 3.5
       time: "20:30"
-    - value: 3.0
+    - value: 3.5
       time: "21:00"
-    - value: 2.5
+    - value: 3.0
       time: "21:30"
     - value: 2.5
       time: "22:00"

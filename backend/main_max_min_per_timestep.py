@@ -28,13 +28,14 @@ def main():
         # print(f"{timesteps[tick]}: {min(values):.2f}-{max(values):.2f}")
 
     # creat plot
-    plt.plot(range(len(mins)), mins, label="min")
     plt.plot(range(len(mins)), maxs, label="max")
     plt.plot(range(len(mins)), avgs, label="avg")
+    plt.plot(range(len(mins)), mins, label="min")
     xticks_interval = 30
     x = list(range(start_tick, end_tick + 1, every_n_ticks * xticks_interval))
     xlabels = [sim0.times[idx].time().strftime("%H:%M") if i % 2 == 0 else "" for i, idx in enumerate(x)]
     plt.xticks(range(0, len(mins), xticks_interval), xlabels)
+    plt.legend()
     plt.show()
 
 
