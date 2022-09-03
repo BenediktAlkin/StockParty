@@ -21,6 +21,7 @@ export class BartenderDrinkComponent implements OnInit {
   public slopeSign: string;
   private twoDecimalFormatter = d3.format(".2f")
   private startTime: Date;
+  private timer: ReturnType<typeof setInterval>;
 
   constructor() { }
 
@@ -29,8 +30,15 @@ export class BartenderDrinkComponent implements OnInit {
     this.price = this.twoDecimalFormatter(this.getPrice(0))
     this.slopeSign = this.toSlopeSignText(this.data.slopeSigns[0])
     this.startTime = this.data.times[0]
-    setInterval(() => this.updateData(), this.data.tickInterval)
+    this.timer = setInterval(() => this.updateData(), this.data.tickInterval)
+    console.log("started timer for " + this.data.name)
   }
+
+  ngOnDestroy(): void {
+    clearInterval(this.timer)
+    console.log("cleared timer for " + this.data.name)
+  }
+
   private getPrice(idx: number): number {
     return Math.round(this.data.prices[idx] * 2) / 2
   }

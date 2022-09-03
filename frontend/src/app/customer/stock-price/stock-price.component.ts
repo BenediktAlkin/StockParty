@@ -19,6 +19,7 @@ export class StockPriceComponent implements OnInit {
   public idString: string;
   private historyTicks: number;
   private startTime: Date;
+  private timer: ReturnType<typeof setInterval>;
 
 
 
@@ -39,9 +40,14 @@ export class StockPriceComponent implements OnInit {
     this.createSvg()
     // NOTE: this is not totally in sync with the real clock 
     // e.g. if tickInterval == 2000 and the interval starts at 00:00:01 while the sim starts at 00:00:00 it will be off by 1 second
-    setInterval(() => this.createSvg(), this.data.tickInterval)
+    this.timer = setInterval(() => this.createSvg(), this.data.tickInterval)
+    console.log("started timer for " + this.data.name)
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.timer)
+    console.log("cleared timer for " + this.data.name)
+  }
 
   private createSvg(): void {
     // line styling
