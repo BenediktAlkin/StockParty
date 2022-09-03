@@ -1,0 +1,78 @@
+<div class="overlay" *ngIf="isLoaded === false">
+    <div class="center">
+        <mat-spinner></mat-spinner>
+    </div>>
+</div>
+
+<div class="overlay" *ngIf="showSettings === true">
+    <div class="center">
+        <div class="settings">
+            <!-- exit -->
+            <button mat-icon-button color="accent" class="settings-close" (click)="closeSettings(false)">
+                <div>X</div>
+                <!-- <mat-icon>close</mat-icon> -->
+            </button>
+
+            <!-- cols -->
+            <div class="settings-label">
+                <!-- <mat-icon class="settings-label-icon">view_column</mat-icon> -->
+                <div>Spalten</div>
+            </div>
+            <div class="settings-slider-info">
+                {{ cols }}
+            </div>
+            <mat-slider thumbLabel min="1" max="5" [(ngModel)]="cols"></mat-slider>
+
+            <!-- column-gap -->
+            <!-- <div class="settings-label">
+                <mat-icon class="settings-label-icon">view_column</mat-icon>
+                <div>Spaltenabstand</div>
+            </div>
+            <div class="settings-slider-info">
+                {{ columnGap }}
+            </div>
+            <mat-slider thumbLabel min="0" max="50" [(ngModel)]="columnGap"></mat-slider> -->
+
+            <!-- primary font-size -->
+            <div class="settings-label">
+                <!-- <mat-icon class="settings-label-icon">format_size</mat-icon> -->
+                <div>Schriftgröße</div>
+            </div>
+            <div class="settings-slider-info">
+                {{ primaryFontSize }}
+            </div>
+            <mat-slider thumbLabel min="10" max="150" [(ngModel)]="primaryFontSize"></mat-slider>
+
+            <!-- show secondary text -->
+            <!-- <div class="settings-label">
+                <mat-icon class="settings-label-icon">visibility</mat-icon>
+                <div>Zeige Preisentwicklung</div>
+            </div>
+            <mat-slide-toggle [(ngModel)]="showSecondaryText"></mat-slide-toggle> -->
+
+            <!-- secondary font-size -->
+            <!-- <div class="settings-label">
+                <mat-icon class="settings-label-icon">format_size</mat-icon>
+                <div>Sekundäre Schriftgröße</div>
+            </div>
+            <div class="settings-slider-info">
+                {{ secondaryFontSize }}
+            </div>
+            <mat-slider thumbLabel min="10" max="150" [(ngModel)]="secondaryFontSize" [disabled]="!showSecondaryText">
+            </mat-slider> -->
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div *ngIf="isLoaded === true">
+    <div class="drink-info" [ngStyle]="{'grid-template-columns': getColsStyle()}">
+        <!-- , 'column-gap': columnGap+'em' -->
+        <bartender-drink [data]="stockPriceData" [primaryFontSize]="primaryFontSize"
+            [showSecondaryText]="showSecondaryText" *ngFor="let stockPriceData of stockPriceDataArray">
+        </bartender-drink>
+    </div>
+</div>

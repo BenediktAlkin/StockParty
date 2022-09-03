@@ -1,0 +1,104 @@
+.drink-info {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    /* background-color: crimson; */
+}
+
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(1, 1, 1, 0.4);
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.settings {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-content: center;
+    align-content: center;
+    background: rgba(1, 1, 1, 0.6);
+    padding: 25px;
+}
+
+.settings-close {
+    top: 0px;
+    right: 0px;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    padding: 0px;
+    border-width: 0px;
+    grid-column: 1 / span 2;
+    justify-self: end;
+    margin-bottom: 20px;
+}
+
+.settings-close>mat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
+
+.settings-label {
+    display: flex;
+    font-size: 40px;
+    color: red;
+    /* background-color: blue; */
+    align-items: center;
+    padding: 5px;
+}
+
+.settings-label-icon {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    color: red;
+    padding: 5px;
+    /* background-color: green; */
+}
+
+.settings-slider-info {
+    font-size: 40px;
+    color: red;
+    padding: 5px;
+    /* background-color: brown; */
+    justify-self: end;
+}
+
+
+.fade-in {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s linear;
+}
+
+.fade-out {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
+}
+
+mat-slide-toggle {
+    justify-self: end;
+}
+
+mat-slider {
+    grid-column: 1 / span 2;
+}

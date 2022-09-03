@@ -1,0 +1,17 @@
+<div [ngStyle]="{'font-size': primaryFontSize+'px'}">
+    {{ data.name }}
+</div>
+<div class="price-text" [ngStyle]="{'font-size': primaryFontSize+'px'}">
+    {{ price }}€ {{ slopeSign }}
+</div>
+<!-- <div class="slope-info" [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
+    {{ price }}€
+    <mat-icon class="arrow"
+        [ngStyle]="{'font-size': secondaryFontSize+'px', 'height': secondaryFontSize+'px', 'width': secondaryFontSize+'px'}">
+        arrow_right_alt
+    </mat-icon>
+    {{ price }}€
+</div> 
+<div [ngStyle]="{'font-size': secondaryFontSize+'px'}" *ngIf="showSecondaryText === true">
+    slope={{ slopeSign }}
+</div> -->

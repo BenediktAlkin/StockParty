@@ -1,0 +1,360 @@
+# tick interval for simulation (default=1000)
+tick_interval: 2000
+seed: 6
+# maximal value for truncating normal distribution (default=0.2)
+noise_max: 0.2
+# variance of normal distribution (default=0.01)
+noise_variance: 0.01
+
+start_time: "14:00"
+drinks:
+  - name: "Cola Rum"
+    points:
+    - value: 2.5
+      time: "14:00"
+    - value: 2.5
+      time: "20:30"
+    - value: 2.5
+      time: "21:00"
+    - value: 2.5
+      time: "21:30"
+    - value: 3.0
+      time: "21:45"
+    - value: 3.5
+      time: "22:00"
+    - value: 4.0
+      time: "22:30"
+    - value: 4.5
+      time: "23:00"
+    - value: 3.5
+      time: "23:20"
+    - value: 3.0
+      time: "23:40"
+    - value: 3.0
+      time: "00:00"
+    - value: 3.0
+      time: "00:10"
+    - value: 3.0
+      time: "00:20"
+    - value: 3.0
+      time: "00:40"
+    - value: 3.5
+      time: "00:45"
+    - value: 3.5
+      time: "01:00"
+    - value: 3.5
+      time: "01:20"
+    - value: 3.0
+      time: "01:40"
+    - value: 2.5
+      time: "02:00"
+    - value: 3.0
+      time: "02:10"
+    - value: 3.5
+      time: "02:15"
+    - value: 4.5
+      time: "02:20"
+    - value: 4.5
+      time: "04:00"
+  - name: "Bacardi Cola"
+    points:
+    - value: 3.0
+      time: "14:00"
+    - value: 3.0
+      time: "20:30"
+    - value: 3.0
+      time: "21:00"
+    - value: 3.0
+      time: "21:30"
+    - value: 2.5
+      time: "22:00"
+    - value: 3.5
+      time: "22:30"
+    - value: 3.0
+      time: "23:00"
+    - value: 3.0
+      time: "23:20"
+    - value: 3.5
+      time: "23:40"
+    - value: 4.0
+      time: "00:00"
+    - value: 3.5
+      time: "00:10"
+    - value: 3.5
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 2.5
+      time: "01:00"
+    - value: 3.0
+      time: "01:20"
+    - value: 2.5
+      time: "01:40"
+    - value: 3.0
+      time: "02:00"
+    - value: 3.5
+      time: "02:10"
+    - value: 4.0
+      time: "02:15"
+    - value: 4.5
+      time: "02:20"
+    - value: 4.5
+      time: "03:00"
+    - value: 4.5
+      time: "04:00"
+  - name: "Malibu Orange"
+    points:
+    - value: 3.0
+      time: "14:00"
+    - value: 3.0
+      time: "20:30"
+    - value: 2.5
+      time: "21:00"
+    - value: 2.0
+      time: "21:30"
+    - value: 2.0
+      time: "22:00"
+    - value: 2.5
+      time: "22:30"
+    - value: 3.0
+      time: "23:00"
+    - value: 3.0
+      time: "23:20"
+    - value: 3.5
+      time: "23:40"
+    - value: 3.5
+      time: "00:00"
+    - value: 3.5
+      time: "00:10"
+    - value: 3.5
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 2.5
+      time: "01:00"
+    - value: 3.0
+      time: "01:20"
+    - value: 2.5
+      time: "01:40"
+    - value: 3.0
+      time: "02:00"
+    - value: 3.5
+      time: "02:15"
+    - value: 4.5
+      time: "02:20"
+    - value: 4.5
+      time: "04:00"
+  - name: "Vodka Orange/Bull"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "20:30"
+    - value: 3.0
+      time: "21:00"
+    - value: 3.0
+      time: "21:30"
+    - value: 3.0
+      time: "22:00"
+    - value: 3.5
+      time: "22:30"
+    - value: 3.0
+      time: "23:00"
+    - value: 2.5
+      time: "23:20"
+    - value: 2.5
+      time: "23:40"
+    - value: 3.0
+      time: "00:00"
+    - value: 3.5
+      time: "00:10"
+    - value: 3.5
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 3.5
+      time: "01:00"
+    - value: 3.5
+      time: "01:20"
+    - value: 3.0
+      time: "01:40"
+    - value: 3.0
+      time: "02:00"
+    - value: 3.0
+      time: "02:15"
+    - value: 3.0
+      time: "02:20"
+    - value: 4.5
+      time: "04:00"
+  - name: "Wüstenwasser"
+    points:
+    - value: 2.5
+      time: "14:00"
+    - value: 2.5
+      time: "20:30"
+    - value: 2.5
+      time: "21:00"
+    - value: 2.0
+      time: "21:30"
+    - value: 2.0
+      time: "22:00"
+    - value: 2.0
+      time: "22:30"
+    - value: 2.5
+      time: "23:00"
+    - value: 2.5
+      time: "23:20"
+    - value: 3.0
+      time: "23:40"
+    - value: 3.0
+      time: "00:00"
+    - value: 3.0
+      time: "00:10"
+    - value: 3.0
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 2.5
+      time: "01:00"
+    - value: 2.5
+      time: "01:20"
+    - value: 2.5
+      time: "01:40"
+    - value: 3.0
+      time: "02:00"
+    - value: 2.5
+      time: "02:15"
+    - value: 4.5
+      time: "02:20"
+    - value: 4.5
+      time: "04:00"
+  - name: "Red Red"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "20:30"
+    - value: 3.0
+      time: "21:00"
+    - value: 2.5
+      time: "21:30"
+    - value: 2.5
+      time: "22:00"
+    - value: 2.0
+      time: "22:30"
+    - value: 3.0
+      time: "23:00"
+    - value: 3.0
+      time: "23:20"
+    - value: 3.0
+      time: "23:40"
+    - value: 3.0
+      time: "00:00"
+    - value: 2.5
+      time: "00:10"
+    - value: 2.5
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 2.5
+      time: "01:00"
+    - value: 3.0
+      time: "01:20"
+    - value: 3.5
+      time: "01:40"
+    - value: 3.5
+      time: "02:00"
+    - value: 3.5
+      time: "02:15"
+    - value: 4.0
+      time: "02:20"
+    - value: 4.5
+      time: "02:25"
+    - value: 4.5
+      time: "04:00"
+  - name: "Flying Hirsch"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "20:30"
+    - value: 3.5
+      time: "21:00"
+    - value: 4.0
+      time: "21:30"
+    - value: 4.0
+      time: "22:00"
+    - value: 3.5
+      time: "22:30"
+    - value: 3.5
+      time: "23:00"
+    - value: 3.5
+      time: "23:20"
+    - value: 3.0
+      time: "23:40"
+    - value: 3.0
+      time: "00:00"
+    - value: 3.5
+      time: "00:10"
+    - value: 3.5
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 2.5
+      time: "01:00"
+    - value: 2.5
+      time: "01:20"
+    - value: 3.0
+      time: "01:40"
+    - value: 3.0
+      time: "02:00"
+    - value: 3.0
+      time: "02:15"
+    - value: 4.5
+      time: "02:20"
+    - value: 4.5
+      time: "04:00"
+  - name: "Dreh & Drink"
+    points:
+    - value: 3.5
+      time: "14:00"
+    - value: 3.5
+      time: "20:30"
+    - value: 3.5
+      time: "21:00"
+    - value: 3.5
+      time: "21:30"
+    - value: 3.0
+      time: "22:00"
+    - value: 2.5
+      time: "22:30"
+    - value: 2.5
+      time: "23:00"
+    - value: 2.5
+      time: "23:20"
+    - value: 3.5
+      time: "23:40"
+    - value: 3.5
+      time: "00:00"
+    - value: 3.0
+      time: "00:10"
+    - value: 3.0
+      time: "00:20"
+    - value: 2.0
+      time: "00:40"
+    - value: 3.0
+      time: "01:00"
+    - value: 3.5
+      time: "01:20"
+    - value: 3.5
+      time: "01:40"
+    - value: 3.5
+      time: "02:00"
+    - value: 3.0
+      time: "02:15"
+    - value: 3.5
+      time: "02:20"
+    - value: 4.5
+      time: "02:25"
+    - value: 4.5
+      time: "04:00"
