@@ -40,7 +40,7 @@ export class StockPriceComponent implements OnInit {
     this.createSvg()
     // NOTE: this is not totally in sync with the real clock 
     // e.g. if tickInterval == 2000 and the interval starts at 00:00:01 while the sim starts at 00:00:00 it will be off by 1 second
-    this.timer = setInterval(() => this.createSvg(), this.data.tickInterval)
+    this.timer = setInterval(() => this.createSvg(), this.data.tickInterval * 5)
     console.log("started timer for " + this.data.name)
   }
 
