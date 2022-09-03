@@ -18,7 +18,7 @@ def main():
     party_end = datetime(time0.year, time0.month, time0.day, 3, 0) + timedelta(days=1)
     start_tick = int((party_start - time0).total_seconds() / (sim0.tick_interval / 1000)) + 1
     end_tick = int((party_end - time0).total_seconds() / (sim0.tick_interval / 1000)) + 1
-    every_n_ticks = 300
+    every_n_ticks = 30
     for tick in range(start_tick, end_tick + 1, every_n_ticks):
         values = [simulation.Simulation.get_price(sim.values[tick]) for sim in sims]
         mins.append(min(values))
@@ -28,7 +28,7 @@ def main():
     # creat plot
     plt.plot(range(len(mins)), mins)
     plt.plot(range(len(mins)), maxs)
-    xticks_interval = 5
+    xticks_interval = 60
     x = list(range(start_tick, end_tick + 1, every_n_ticks * xticks_interval))
     plt.xticks(range(0, len(mins), xticks_interval), [sim0.times[i].time().strftime("%H:%M") for i in x])
     plt.show()
