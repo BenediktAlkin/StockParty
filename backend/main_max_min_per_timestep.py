@@ -15,5 +15,6 @@ def main():
         timestep = container.sims[0].times[tick]
         print(f"{timestep}: {min(values):.2f}-{max(values):.2f}")
 
+
 if __name__ == "__main__":
     main()
