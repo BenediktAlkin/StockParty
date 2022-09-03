@@ -13,6 +13,7 @@ def main():
     sim0 = sims[0]
     mins = []
     maxs = []
+    avgs = []
     time0 = sim0.times[0]
     party_start = datetime(time0.year, time0.month, time0.day, 20, 30)
     party_end = datetime(time0.year, time0.month, time0.day, 3, 0) + timedelta(days=1)
@@ -23,11 +24,13 @@ def main():
         values = [simulation.Simulation.get_price(sim.values[tick]) for sim in sims]
         mins.append(min(values))
         maxs.append(max(values))
+        avgs.append(np.mean(values))
         # print(f"{timesteps[tick]}: {min(values):.2f}-{max(values):.2f}")
 
     # creat plot
-    plt.plot(range(len(mins)), mins)
-    plt.plot(range(len(mins)), maxs)
+    plt.plot(range(len(mins)), mins, label="min")
+    plt.plot(range(len(mins)), maxs, label="max")
+    plt.plot(range(len(mins)), avgs, label="avg")
     xticks_interval = 60
     x = list(range(start_tick, end_tick + 1, every_n_ticks * xticks_interval))
     plt.xticks(range(0, len(mins), xticks_interval), [sim0.times[i].time().strftime("%H:%M") for i in x])

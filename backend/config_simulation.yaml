@@ -134,7 +134,7 @@ drinks:
       time: "22:30"
     - value: 3.0
       time: "23:00"
-    - value: 3.0
+    - value: 3.5
       time: "23:20"
     - value: 3.5
       time: "23:40"
