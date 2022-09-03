@@ -72,18 +72,20 @@ class Simulation:
         if self.is_finished:
             return
 
-        # generate noise
-        # noise = self.noise_generator.generate_noise()
-        # delta = self.slope * self.tick_interval / 1000 + noise
-        delta = self.noise_generator.generate_noise() + self.slope
-
         old_value = self.values[-1]
         self.logger.debug(f"old_value: {old_value:.4f}")
-        self.logger.debug(f"proposed_delta: {delta:.4f}")
         old_price = self.get_price(old_value)
         #self.logger.debug(f"old_price: {old_price}")
         expected_price = self.points[self.cur_point_idx + 1].value
         self.logger.debug(f"expected_price: {expected_price}")
+
+        # generate noise
+        # noise = self.noise_generator.generate_noise()
+        # delta = self.slope * self.tick_interval / 1000 + noise
+        delta = self.noise_generator.generate_noise()
+        if old_price != expected_price:
+            delta += self.slope
+        self.logger.debug(f"proposed_delta: {delta:.4f}")
 
         # pull towards center (if price is what it's supposed to be)
         if old_price == expected_price:
