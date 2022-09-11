@@ -1,25 +1,10 @@
-- maybe price and drinkname should be swapped
-- make sure prices cant fluctuate
-- backup price list (outage)
+indicator for current time to check how far apart different devices are
+bartender +-= depends on slope not current price
 
-### meeting notes
-sync config with all devices
-- wüstewasser
-- redred
-- dreh& drinks
-- vodka bull
-- cappy vodka
-
-helfer:
-- only price view
-- indication for course direction
-- meter preis
-
-design:
-- lj logo transparent background
-- preise größer
-- cur preis fett
-
-1h trajectory
-
-börsenkurs rot (blue on blue)
+## Ideas
+- some indication of crash
+  - flickering
+- bartenders can add metres to teams
+  - maybe register teams prior to event
+  - bartenders use their phones/tablets
+  - make sure these numbers can be corrected
