@@ -26,7 +26,7 @@ def main():
     for sim in sims:
         plt.plot(range(len(sim.values)), sim.values)
         plt.xticks([0] + list(np.cumsum(sim.point_ticks)))
-        plt.yticks(np.arange(1.25, 4.0, 0.25))
+        plt.yticks(np.arange(1.25, 5.0, 0.25))
         plt.title(sim.name)
         plt.grid()
         plt.show()

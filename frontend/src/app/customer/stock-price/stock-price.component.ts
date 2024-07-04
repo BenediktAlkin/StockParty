@@ -38,7 +38,7 @@ export class StockPriceComponent implements OnInit {
     console.log("history ticks: " + this.historyTicks.toString())
 
     this.createSvg()
-    // NOTE: this is not totally in sync with the real clock 
+    // NOTE: this is not totally in sync with the real clock
     // e.g. if tickInterval == 2000 and the interval starts at 00:00:01 while the sim starts at 00:00:00 it will be off by 1 second
     // times 5 to enable a "wiggly" line with a low tickInterval in simulation (e.g. 2000) but also have a distinctivly visible update in the UI
     // every e.g. 10s (with 2s UI updates the update is very subtle)
@@ -126,10 +126,10 @@ export class StockPriceComponent implements OnInit {
 
     // Compute domains.
     const xDomain = d3.extent(x) as [Date, Date];
-    const yDomain = [1.75, 4.75];
+    const yDomain = [1.75, 5.25];
 
     // Construct scales and axes.
-    const yTicks = 6;
+    const yTicks = 7;
     const xScale = d3.scaleTime().domain(xDomain).range(xRange);
     const yScale = d3.scaleLinear(yDomain, yRange);
     const timeFormatter = d3.timeFormat("%H:%M")
@@ -165,7 +165,7 @@ export class StockPriceComponent implements OnInit {
         .attr("font-size", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? `${yticksFontSizeSelected}px` : `${yticksFontSize}px`)
         .attr("font-weight", i => Math.abs(y[y.length - 1] - (i as number)) < 0.25 ? "bold" : "normal"));
     // remove bar of y-axis
-    //.call(g => g.select(".domain").remove()) 
+    //.call(g => g.select(".domain").remove())
     // draw horizontal grid lines (at exact price points)
     // .call(g => g.selectAll(".tick line").clone()
     //     .attr("x2", width - marginLeft - marginRight)

@@ -10,6 +10,7 @@
 - Open CMD window (to host frontend website)
 - `cd .../StockParty/frontend`
 - `npm install`
+- `npm install -g @angular/cli@17`
 - `ng serve --host 0.0.0.0`
 - Open second CMD window (to host backend service)
 - `cd .../StockParty/backend`
