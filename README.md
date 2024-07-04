@@ -5,7 +5,7 @@
 - Setup Python
 - Download StockParty into folder `.../StockParty`
 - Install NodeJS 
-  - Download installer from `https://nodejs.org/en/download/prebuilt-installer`
+  - Download installer from https://nodejs.org/en/download/prebuilt-installer
   - Click through installer
 - Open CMD window (to host frontend website)
 - `cd .../StockParty/frontend`
